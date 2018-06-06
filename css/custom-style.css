@@ -1,0 +1,57 @@
+h1{
+    text-align: center;
+}
+
+.text-center{
+    text-align: center;
+}
+
+footer {
+    /* position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0; */
+    margin-top: 20px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #333;
+    text-align: center;
+}
+
+.article-detail {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background: #eee;
+}
+
+.article-detail .article-title{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.article-desc{
+    padding-top: 20px;
+    font-size: 18px;
+}
+.comment-container{
+    margin-top: 20px;
+}
+
+.comment-container span{
+    font-size: 16px;
+
+}
+
+.comment-container .comment{
+    width: 100%;
+    margin-bottom: 10px;
+    background: #eee;
+}
+
+.comment span.span-comment{
+    font-weight: normal;
+    padding-left: 10px;
+}
