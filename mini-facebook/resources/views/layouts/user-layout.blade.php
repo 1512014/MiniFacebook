@@ -14,6 +14,7 @@
     {{--<link rel="stylesheet" type="text/css" href="/css/fontawesome.min.css">--}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/custom-style.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom-user-layout.css">
 
 
     @stack('styles')
@@ -93,10 +94,13 @@
                 </li>
                 <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
                 <li class="icon user">
-                    <a href="/">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                     <span class="tooltiptext">Logout</span>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
 
             </ul>
@@ -105,11 +109,21 @@
         </div>
     </nav>
 
+    <div class="friend-panel">
+        <p class="list-title">CONTACTS</p>
+        <ul class="panel-list">
+            @yield('contacts')
+        </ul>
+        <p class="list-title">GROUP CONVERSATIONS</p>
+        <ul class="panel-list">
+            @yield('groups')
+        </ul>
+    </div>
     @section('sidebar')
         {{--This is the master sidebar.--}}
     @show
 
-    <div class="container">
+    <div class="newfeed">
         @yield('content')
     </div>
 
