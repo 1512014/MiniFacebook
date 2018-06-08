@@ -1,0 +1,101 @@
+.write-post {
+    background: #fff !important;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+button.post-btn{
+    width: 100%;
+}
+
+div.image-upload{
+    display: none;
+}
+
+div.image-show{
+    display: none;
+}
+
+div.post-action {
+    display: none;
+}
+
+.image-upload label {
+    font-weight: 600;
+}
+
+img.avatar{
+    width: 40px;
+}
+
+.comment-container img.avatar {
+    width: 30px;
+}
+
+.comment-item img.avatar{
+    width: 30px;
+}
+
+img.post-image {
+    width: 100%;
+    height: auto;
+}
+
+.post-item {
+    background:#fff !important ;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.post-item .user-name{
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.post-item span.user-name{
+    text-align: start;
+}
+
+.post-item .image-container{
+
+}
+
+ul.react{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+    margin-top: 10px;
+}
+
+ul.react li {
+    float: left;
+}
+
+.comment-item {
+    text-align: left;
+    margin-top: 10px;
+    padding-right: 0;
+}
+
+.comment-item p {
+    background-color: #efefef;
+    border-radius: 10px;
+    padding: 10px
+}
+
+.comment-item span.comment-owner {
+    font-weight: 600;
+    color: #00a1b8;
+    padding-right: 5px;
+}
+
+.comment-container {
+    padding-bottom: 20px;
+}

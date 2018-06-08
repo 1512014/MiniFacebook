@@ -62,7 +62,7 @@
             </ul>
             <ul style="float: right;">
                 <li class="user">
-                    <a href="#">
+                    <a href="/user">
                         <img class="user-image" src="/img/user1.png">
                         <span class="nav-text">Vy</span>
                     </a>
@@ -75,29 +75,10 @@
                 </li>
                 <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
                 <li class="icon user">
-                    <a href="/">
-                        <i class="fas fa-user-friends"></i>
-                    </a>
-                    <span class="tooltiptext">Friends</span>
-                </li>
-                <li class="icon user">
-                    <a href="/">
-                        <i class="fab fa-facebook-messenger"></i>
-                    </a>
-                    <span class="tooltiptext">Messages</span>
-                </li>
-                <li class="icon user">
-                    <a href="/">
-                        <i class="fas fa-globe"></i>
-                    </a>
-                    <span class="tooltiptext">Notification</span>
-                </li>
-                <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
-                <li class="icon user">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="fas fa-sign-out-alt"></i>
+                        <i style="line-height: 26px;" class="fas fa-sign-out-alt"></i>
+                        <p style="font-size: 14px; float:right; margin: 0; font-weight: 600; padding-left: 5px;">Logout</p>
                     </a>
-                    <span class="tooltiptext">Logout</span>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
@@ -123,10 +104,14 @@
         {{--This is the master sidebar.--}}
     @show
 
+
+
     <div class="newfeed-wrapper">
         <div class="newfeed">
+            @yield('profile-images')
             @yield('content')
         </div>
+
 
     </div>
 

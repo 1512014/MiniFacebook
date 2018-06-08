@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('dashboard.index');
+    return view('dashboard.home');
 })->middleware('auth');
+
+Route::get('/user', function () {
+    return view('dashboard.user-detail');
+})->middleware('auth');
+
+Route::post('/', function(){
+    return view('dashboard.home');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
