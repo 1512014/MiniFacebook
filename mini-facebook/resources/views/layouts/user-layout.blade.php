@@ -123,9 +123,13 @@
         {{--This is the master sidebar.--}}
     @show
 
-    <div class="newfeed">
-        @yield('content')
+    <div class="newfeed-wrapper">
+        <div class="newfeed">
+            @yield('content')
+        </div>
+
     </div>
+
 
 
 </div>
