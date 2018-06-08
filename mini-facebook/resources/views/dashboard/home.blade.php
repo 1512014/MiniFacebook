@@ -112,7 +112,7 @@
             {{ csrf_field() }}
             <div class="form-group post-content">
                 {{--<label for="message">Your comment:</label>--}}
-                <textarea rows="5" name="content" id="content" class="form-control" placeholder="What's in your mind..."></textarea>
+                <textarea rows="3" name="content" id="content" class="form-control" placeholder="What's in your mind..."></textarea>
                 <input type="hidden" id="post_id" value="">
             </div>
             <div class="form-group image-upload">

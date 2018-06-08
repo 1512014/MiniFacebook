@@ -1,7 +1,174 @@
-.profile-images {
-    width: 800px;
+/*Friend panel*/
+.friend-panel {
+    position: absolute;
+    top: 42px;
+    right:0;
+    bottom: 0;
+    overflow-y: scroll;
+    height: 95vh;
+    border-left: 1px solid grey;
+    width: 200px;
 }
+
+.friend-panel .list-title {
+    margin-top: 16px;
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4c4c4c;
+}
+
+.friend-panel ul.panel-list {
+    list-style: none;
+    padding: 0;
+}
+.friend-panel .panel-list li {
+    padding-right: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.friend-panel .panel-list li img{
+    height: 30px;
+    border-radius: 50px;
+    margin: 10px;
+
+}
+
+/* width */
+.friend-panel::-webkit-scrollbar {
+    width: 0;
+}
+
+/* Track */
+.friend-panel::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 15px;
+}
+
+/* Handle */
+.friend-panel::-webkit-scrollbar-thumb {
+    background: #bbbbbb;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.friend-panel::-webkit-scrollbar-thumb:hover {
+    background: #8a8a8a;
+}
+
+/*End friend panel*/
+
 
 .profile-images img.cover{
     width: 100%;
 }
+
+.newfeed-wrapper {
+    text-align: center;
+}
+
+
+.profile-images{
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    margin-left: 100px;
+    margin-right: 300px;
+    width: 700px;
+    background-color: white;
+    margin-bottom: 20px;
+    padding-bottom: 50px;
+
+}
+
+
+.newfeed {
+    top: 0;
+    width: 700px;
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 300px;
+    text-align: left;
+}
+
+.profile-images .avatar-container {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #d3d3d3;
+    padding: 5px;
+    width: 160px;
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+
+}
+
+.avatar-container img.avatar{
+    width: 100%;
+}
+
+ul.friend-option {
+    list-style: none;
+    position: absolute;
+    left: 220px;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+}
+
+ul.friend-option li {
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #00a1b8;
+    font-weight: 600;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+
+}
+
+ul.friend-option li:last-child {
+    border-left: none;
+}
+
+
+.btn-group {
+    position: absolute!important;
+    right: 20px;
+    bottom: 80px;
+}
+
+.btn-group button {
+    margin-left: 5px!important;
+}
+
+@media screen and (max-width: 1050px) {
+
+    .profile-images {
+        margin-left: 30px;
+    }
+
+    .newfeed {
+        margin-left: 30px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+
+    .friend-panel {
+        display: none;
+    }
+    .profile-images {
+        margin: auto;
+    }
+
+    .newfeed {
+        margin-left: auto ;
+        margin-right: auto;
+    }
+}
+
+

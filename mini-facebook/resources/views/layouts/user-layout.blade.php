@@ -99,6 +99,9 @@
         <ul class="panel-list">
             @yield('groups')
         </ul>
+        <div class="search-contact">
+            <
+        </div>
     </div>
     @section('sidebar')
         {{--This is the master sidebar.--}}
@@ -107,8 +110,8 @@
 
 
     <div class="newfeed-wrapper">
+        @yield('profile-images')
         <div class="newfeed">
-            @yield('profile-images')
             @yield('content')
         </div>
 

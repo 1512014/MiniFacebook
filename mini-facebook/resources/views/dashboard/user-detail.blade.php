@@ -110,12 +110,29 @@
 @section('profile-images')
     <div class="profile-images">
         <img class="cover" src="/img/cover1.jpg">
+        <div class="avatar-container">
+            <img class="avatar" src="/img/user1.png">
+        </div>
+        <ul class="friend-option">
+            <li><a href="#">About</a> </li>
+            <li><a href="#">Friends</a> </li>
+        </ul>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">
+                <i class="fas fa-user-plus"></i> Add Friend
+            </button>
+            <button type="button" class="btn btn-default">
+                <i class="fas fa-comment"></i> Message
+            </button>
+        </div>
+
     </div>
 @endsection
 
 @section('content')
     <div class="write-post">
-        <form id="post" method="post" action="/" enctype="multipart/form-data">
+        <form id="post" method="post" action="" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group post-content">
                 {{--<label for="message">Your comment:</label>--}}
@@ -139,12 +156,12 @@
     {{--Add loop posts here--}}
     <div class="post-item">
         <div class="container-fluid">
-            <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
+            <div class="row" style="margin-bottom: 20px; height: 42px; line-height: 42px">
                 <div class="col-sm-10">
                     <img src="/img/user1.png" class="avatar">
                     <a href="#"><span class="user-name">Huynh Hong An</span></a>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2" style="text-align: right">
                     <span class="posted-time">8 hrs</span>
                 </div>
             </div>
