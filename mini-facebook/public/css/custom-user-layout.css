@@ -213,11 +213,11 @@ li.icon a:hover{
 .friend-panel {
     position: absolute;
     top: 42px;
-    right:0;
+    right:10px;
     bottom: 0;
     overflow-y: scroll;
     height: 95vh;
-    border-left: 1px solid grey;
+    border-left: 1px solid #c5c5c5;
     width: 200px;
 }
 

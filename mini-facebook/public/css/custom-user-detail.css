@@ -2,11 +2,11 @@
 .friend-panel {
     position: absolute;
     top: 42px;
-    right:0;
+    right: 10px;
     bottom: 0;
     overflow-y: scroll;
     height: 95vh;
-    border-left: 1px solid grey;
+    border-left: 1px solid #c5c5c5;
     width: 200px;
 }
 
@@ -135,13 +135,13 @@ ul.friend-option li:last-child {
 }
 
 
-.btn-group {
+.profile-image-buttons {
     position: absolute!important;
     right: 20px;
     bottom: 80px;
 }
 
-.btn-group button {
+.profile-image-buttons button {
     margin-left: 5px!important;
 }
 

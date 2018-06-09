@@ -20,11 +20,14 @@ Route::post('/', function(){
 
 Route::get('/user', function () {
     return view('dashboard.user-detail');
-})->middleware('auth');
+})->middleware('auth')->name('user-detail');
 Route::post('/user', function(){
     return view('dashboard.user-detail');
 });
 
+Route::get('/friends', function () {
+    return view('dashboard.friend-list');
+})->middleware('auth')->name('friend-list');
 
 Auth::routes();
 

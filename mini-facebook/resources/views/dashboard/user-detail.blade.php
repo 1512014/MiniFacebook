@@ -115,10 +115,10 @@
         </div>
         <ul class="friend-option">
             <li><a href="#">About</a> </li>
-            <li><a href="#">Friends</a> </li>
+            <li><a href="{{route('friend-list')}}">Friends</a> </li>
         </ul>
 
-        <div class="btn-group">
+        <div class="btn-group profile-image-buttons">
             <button type="button" class="btn btn-default">
                 <i class="fas fa-user-plus"></i> Add Friend
             </button>

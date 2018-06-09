@@ -62,7 +62,7 @@
             </ul>
             <ul style="float: right;">
                 <li class="user">
-                    <a href="/user">
+                    <a href="{{route('user-detail')}}">
                         <img class="user-image" src="/img/user1.png">
                         <span class="nav-text">Vy</span>
                     </a>
@@ -111,6 +111,7 @@
 
     <div class="newfeed-wrapper">
         @yield('profile-images')
+        @yield('friends')
         <div class="newfeed">
             @yield('content')
         </div>
