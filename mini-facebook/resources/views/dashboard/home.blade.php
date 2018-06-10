@@ -108,45 +108,84 @@
 
 @section('content')
     <div class="write-post">
-        <form id="post" method="post" action="/" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group post-content">
+        {{--<form id="post" method="post" action="Post" enctype="multipart/form-data">--}}
+
+            {{--<div class="form-group post-content">--}}
                 {{--<label for="message">Your comment:</label>--}}
-                <textarea rows="3" name="content" id="content" class="form-control" placeholder="What's in your mind..."></textarea>
-                <input type="hidden" id="post_id" value="">
-            </div>
-            <div class="form-group image-upload">
-                <label for="image" style="font-weight: bold">Upload Image:</label>
-                <input type="file" name="image" id="image" class="form-control">
+                {{--<textarea rows="3" name="content" id="content" class="form-control" placeholder="What's in your mind..."></textarea>--}}
+                {{--<input type="hidden" id="post_id" value="">--}}
+            {{--</div>--}}
+            {{--<div class="form-group image-upload">--}}
+                {{--<label for="image" style="font-weight: bold">Upload Image:</label>--}}
+                {{--<input type="file" name="image" id="image" class="form-control">--}}
 
-            </div>
-            <div class="image-show">
+            {{--</div>--}}
+            {{--<div class="image-show">--}}
 
-            </div>
-            <div class="form-group post-action">
-                <button type="submit" class="btn btn-primary post-btn">Post</button>
-            </div>
-        </form>
+            {{--</div>--}}
+            {{--<div class="form-group post-action">--}}
+                {{--<button type="submit" class="btn btn-primary post-btn">Post</button>--}}
+            {{--</div>--}}
+        {{--</form>--}}
+        {!! Form::open(['method'=>'POST', 'action'=>'PostController@store', 'id'=>'post', 'enctype'=>'multipart/form-data']) !!}
+        {{ csrf_field() }}
+
+        <div class="form-group post-content">
+            {!! Form::textarea('post_content', null, ['class'=>'form-control', 'placeholder' => 'What\'s in your mind...', 'id'=>'content', 'rows'=>3]) !!}
+            {!! Form::hidden('user_id', $current_user->id) !!}
+        </div>
+
+        <div class="form-group image-upload">
+            {!! Form::label('image', 'Upload Image:') !!}
+            {!! Form::file('image', ['class'=>'form-control']) !!}
+        </div>
+
+        <div class="form-group post-action">
+            {!! Form::submit('Post', ['class'=>'btn btn-primary post-btn']) !!}
+        </div>
+
+        {!! Form::close() !!}
     </div>
 
     {{--Add loop posts here--}}
+    @foreach ($posts as $post)
     <div class="post-item">
         <div class="container-fluid">
             <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
-                <div class="col-sm-10">
-                    <img src="/img/user1.png" class="avatar">
-                    <a href="#"><span class="user-name">Huynh Hong An</span></a>
+                <div class="col-sm-7">
+                    <img src="{{$post->post_author->avatar}}" class="avatar">
+                    <a href="#"><span class="user-name">{{$post->post_author->name}}</span></a>
                 </div>
+                @if($post->user_id === $current_user->id)
                 <div class="col-sm-2">
                     <span class="posted-time">8 hrs</span>
                 </div>
+                <div class="col-sm-3">
+                    <form action="{{ route('posts.destroy' , $post->id)}}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger btn-delete-post" onclick="return confirm('Are you sure?')">Delete Post</button>
+                    </form>
+
+                </div>
+                @else
+                    <div class="col-sm-5" style="text-align: right">
+                        <span class="posted-time">8 hrs</span>
+                    </div>
+                @endif
             </div>
+            <div class="row content-container">
+                <div class="col-sm-12">
+                    <p>{{$post->post_content}}</p>
+                </div>
+            </div>
+            @if($post->image_path != null)
             <div class="row image-container">
                 <div class="col-sm-12">
-                    <img class="post-image" src="/img/post1.jpg">
+                    <img class="post-image" src="{{$post->image_path}}">
                 </div>
-
             </div>
+            @endif
             <div class="row react">
                 <div class="col-sm-12">
                 <ul class="react">
@@ -158,7 +197,7 @@
 
             <div class="row comment-container">
                 <div class="col-sm-1">
-                    <img src="/img/user1.png" class="avatar">
+                    <img src="{{$current_user->avatar}}" class="avatar">
                 </div>
                 <div class="col-sm-10">
                     <input type="text" class="comment form-control" placeholder="Leave a comment...">
@@ -169,37 +208,22 @@
 
             </div>
 
+            @foreach($post->comments as $comment)
             {{--Add loops comments here--}}
             <div class="row comment-item">
                 <div class="col-sm-1">
-                    <img src="/img/user1.png" class="avatar">
+                    <img src="{{$comment->comment_author->avatar}}" class="avatar">
                 </div>
                 <div class="col-sm-11">
-                    <p> <a href="#"><span class="comment-owner">TaVy</span></a>This rabit is so cuteeeeeeeeeeeeeeeeee eeeeeeeeeeee</p>
+                    <p> <a href="#"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
                 </div>
             </div>
-
-
-            <div class="row comment-item">
-                <div class="col-sm-1">
-                    <img src="/img/user1.png" class="avatar">
-                </div>
-                <div class="col-sm-11">
-                    <p> <a href="#"><span class="comment-owner">TaVy</span></a>Rabbits are small mammals in the family Leporidae of the order Lagomorpha (along with the hare and the pika). Oryctolagus cuniculus includes the European rabbit species and its descendants, the world's 305 breeds[1] of domestic rabbit. Sylvilagus includes thirteen wild rabbit species, among them the seven types of cottontail. The European rabbit, which has been introduced on every continent except Antarctica, is familiar throughout the world as a wild prey animal and as a domesticated form of livestock and pet. With its widespread effect on ecologies and cultures, the rabbit (or bunny) is, in many areas of the world, a part of daily life—as food, clothing, and companion, and as a source of artistic inspiration.</p>
-                </div>
-            </div>
-
-            <div class="row comment-item">
-                <div class="col-sm-1">
-                    <img src="/img/user1.png" class="avatar">
-                </div>
-                <div class="col-sm-11">
-                    <p> <a href="#"><span class="comment-owner">TaVy</span></a>anion, and as a source of artistic inspiration.</p>
-                </div>
-            </div>
-
             {{--End loop comments--}}
+            @endforeach
+
+
         </div>
     </div>
+    @endforeach
     {{--End loop posts--}}
 @endsection

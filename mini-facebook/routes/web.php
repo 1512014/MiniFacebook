@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.home');
-})->middleware('auth');
-Route::post('/', function(){
-    return view('dashboard.home');
-});
+//Route::get('/', function () {
+//    return view('dashboard.home');
+//})->middleware('auth');
+//Route::post('/', function(){
+//    return view('dashboard.home');
+//});
 
 Route::get('/user', function () {
     return view('dashboard.user-detail');
@@ -32,3 +32,6 @@ Route::get('/friends', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('posts', 'PostController')->middleware('auth');
+Route::resource('comments', 'CommentController')->middleware('auth');

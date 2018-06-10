@@ -143,7 +143,7 @@
                                <img src="/img/user1.png">
                            </div>
                            <div class="user-info">
-                               <p class="user-name"><a href="#">Huynh Hong An</a></p>
+                               <p class="user-name"><a href="{{route('user-detail')}}">Huynh Hong An</a></p>
                            </div>
                        </div>
                        <div class="col-sm-6 button-container" style="text-align: right">
