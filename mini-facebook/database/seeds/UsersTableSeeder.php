@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
                 'id' => 1,
                 'name' => 'test',
                 'avatar' => '/img/user1.png',
+                'cover' => '/img/cover1.jpg',
                 'email' => 'test@mailinator.com',
                 'password' => bcrypt('123456'),
             ],

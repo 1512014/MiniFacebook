@@ -62,9 +62,9 @@
             </ul>
             <ul style="float: right;">
                 <li class="user">
-                    <a href="{{route('user-detail')}}">
-                        <img class="user-image" src="/img/user1.png">
-                        <span class="nav-text">Vy</span>
+                    <a href="{{route('user-detail', ['id' => Auth::user()->id])}}">
+                        <img class="user-image" src="{{Auth::user()->avatar}}">
+                        <span class="nav-text">{{Auth::user()->name}}</span>
                     </a>
                 </li>
                 <li class="horizontal-hr"></li>
@@ -111,7 +111,6 @@
 
     <div class="newfeed-wrapper">
         @yield('profile-images')
-        @yield('friends')
         <div class="newfeed">
             @yield('content')
         </div>

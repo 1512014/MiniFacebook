@@ -109,56 +109,34 @@
 @endsection
 
 @section('profile-images')
-    <div class="profile-images">
-        <img class="cover" src="/img/cover1.jpg">
-        <div class="avatar-container">
-            <img class="avatar" src="/img/user1.png">
-        </div>
-        <ul class="friend-option">
-            <li><a href="#">About</a> </li>
-            <li><a href="{{route('friend-list')}}">Friends</a> </li>
-        </ul>
-
-        <div class="btn-group profile-image-buttons">
-            <button type="button" class="btn btn-default">
-                <i class="fas fa-user-plus"></i> Add Friend
-            </button>
-            <button type="button" class="btn btn-default">
-                <i class="fas fa-comment"></i> Message
-            </button>
-        </div>
-
-    </div>
+    @include('layouts.profile-images')
 @endsection
 
-@section('friends')
+@section('content')
     <div class="friend-list">
         <ul class="friend-list">
             {{--Loops friends here--}}
             <li>
                 <div class="container">
-                   <div class="row">
-                       <div class="col-sm-6">
-                           <div class="image-container">
-                               <img src="/img/user1.png">
-                           </div>
-                           <div class="user-info">
-                               <p class="user-name"><a href="{{route('user-detail')}}">Huynh Hong An</a></p>
-                           </div>
-                       </div>
-                       <div class="col-sm-6 button-container" style="text-align: right">
-                           <button type="button" class="btn btn-default friend-list-buttons">
-                               <i class="fas fa-user-plus"></i> Add Friend
-                           </button>
-                           <button type="button" class="btn btn-default friend-list-buttons">
-                               <i class="fas fa-trash"></i> Remove Friend
-                           </button>
-                       </div>
-                   </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="image-container">
+                                <img src="/img/user1.png">
+                            </div>
+                            <div class="user-info">
+                                <p class="user-name"><a href="{{route('user-detail', ['id'=>Auth::user()->id])}}">Huynh Hong An</a></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 button-container" style="text-align: right">
+                            <button type="button" class="btn btn-default friend-list-buttons">
+                                <i class="fas fa-user-plus"></i> Accept
+                            </button>
+                            <button type="button" class="btn btn-default friend-list-buttons">
+                                <i class="fas fa-trash"></i> Remove Request
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
-
-
             </li>
             {{--End loops friends--}}
 
@@ -170,23 +148,21 @@
                                 <img src="/img/user1.png">
                             </div>
                             <div class="user-info">
-                                <p class="user-name"><a href="#">Huynh Hong An</a></p>
+                                <p class="user-name"><a href="{{route('user-detail', ['id'=>Auth::user()->id])}}">Huynh Hong An</a></p>
                             </div>
                         </div>
                         <div class="col-sm-6 button-container" style="text-align: right">
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-user-plus"></i> Add Friend
+                                <i class="fas fa-user-plus"></i> Accept
                             </button>
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-trash"></i> Remove Friend
+                                <i class="fas fa-trash"></i> Remove Request
                             </button>
                         </div>
                     </div>
                 </div>
-
-
-
             </li>
+
             <li>
                 <div class="container">
                     <div class="row">
@@ -195,23 +171,21 @@
                                 <img src="/img/user1.png">
                             </div>
                             <div class="user-info">
-                                <p class="user-name"><a href="#">Huynh Hong An</a></p>
+                                <p class="user-name"><a href="{{route('user-detail', ['id'=>Auth::user()->id])}}">Huynh Hong An</a></p>
                             </div>
                         </div>
                         <div class="col-sm-6 button-container" style="text-align: right">
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-user-plus"></i> Add Friend
+                                <i class="fas fa-user-plus"></i> Accept
                             </button>
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-trash"></i> Remove Friend
+                                <i class="fas fa-trash"></i> Remove Request
                             </button>
                         </div>
                     </div>
                 </div>
-
-
-
             </li>
+
             <li>
                 <div class="container">
                     <div class="row">
@@ -220,22 +194,19 @@
                                 <img src="/img/user1.png">
                             </div>
                             <div class="user-info">
-                                <p class="user-name"><a href="#">Huynh Hong An</a></p>
+                                <p class="user-name"><a href="{{route('user-detail', ['id'=>Auth::user()->id])}}">Huynh Hong An</a></p>
                             </div>
                         </div>
                         <div class="col-sm-6 button-container" style="text-align: right">
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-user-plus"></i> Add Friend
+                                <i class="fas fa-user-plus"></i> Accept
                             </button>
                             <button type="button" class="btn btn-default friend-list-buttons">
-                                <i class="fas fa-trash"></i> Remove Friend
+                                <i class="fas fa-trash"></i> Remove Request
                             </button>
                         </div>
                     </div>
                 </div>
-
-
-
             </li>
 
         </ul>

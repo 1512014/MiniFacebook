@@ -63,7 +63,7 @@ class PostController extends Controller
 
         Post::create($input);
 
-        return redirect('/posts');
+        return redirect()->back();
     }
 
     /**
@@ -115,4 +115,6 @@ class PostController extends Controller
 
         return redirect(route('posts.index'));
     }
+
+
 }
