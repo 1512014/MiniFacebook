@@ -52,9 +52,14 @@
 @section('content')
     <div class="friend-list">
         <ul class="friend-list">
+            @if(count($friends) == 0)
+                <div class="container" style="text-align: center">
+                    You have no friends
+                </div>
+            @endif
             {{--Loops friends here--}}
             @foreach($friends as $friend)
-            <li>
+            <li id="friend-{{$friend->user_data->id}}">
                 <div class="container">
                    <div class="row">
                        <div class="col-sm-6">
@@ -72,15 +77,10 @@
                                @else
                                @endif
                            @else
-                               @if($friend->status == 1)
-                                   {{--<button type="button" class="btn btn-default friend-list-buttons">--}}
-                                       {{--<i class="fas fa-user-plus"></i> Add Friend--}}
-                                   {{--</button>--}}
-                               @elseif($friend->status == 2)
-                                   <button type="button" class="btn btn-default friend-list-buttons">
-                                       <i class="fas fa-trash"></i> Remove Friend
-                                   </button>
-                               @endif
+                               <button type="button" class="btn btn-default friend-list-buttons remove-friend" data-user-id="{{$friend->user_data->id}}">
+                                   <i class="fas fa-trash"></i> Remove Friend
+                               </button>
+
                            @endif
 
 

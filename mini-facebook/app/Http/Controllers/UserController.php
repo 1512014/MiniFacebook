@@ -26,7 +26,15 @@ class UserController extends Controller
         return $friends;
     }
     public function isFriend($id, $user){
-        $friends = Friend::where('user1', $user->id)->get();
+        $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
+        foreach ($friends as $friend){
+            if($friend->user2 == $id)
+                return true;
+        }
+        return false;
+    }
+    public function isRequest($id, $user){
+        $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.pending'))->get();
         foreach ($friends as $friend){
             if($friend->user2 == $id)
                 return true;
@@ -37,6 +45,7 @@ class UserController extends Controller
         $current_user = Auth::user();
         $user = User::findOrFail($user_id);
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
+        $user['is_request'] = $this->isRequest($current_user->id, $user);
         $posts = Post::where('user_id', $user_id)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
@@ -54,6 +63,7 @@ class UserController extends Controller
         $current_user = Auth::user();
         $user = User::findOrFail($user_id);
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
+        $user['is_request'] = $this->isRequest($current_user->id, $user);
         $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
         $current_friends = Friend::where('user1', $current_user->id)->get();
         $friend_ids = [];
@@ -87,6 +97,7 @@ class UserController extends Controller
         $current_user = Auth::user();
         $user = User::findOrFail($user_id);
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
+        $user['is_request'] = $this->isRequest($current_user->id, $user);
         $requests = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.pending'))->get();
         $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
         foreach ($requests as $request){
@@ -103,19 +114,82 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $current_user = Auth::user();
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
+        $user['is_request'] = $this->isRequest($current_user->id, $user);
         $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
         foreach ($friends as $friend){
             $friend['user_data'] = User::findOrFail($friend->user2);
         }
         $current_user_friends = self::getCurrentUserFriends();
-        return view('dashboard.user.about', compact('user', 'friends', 'current_user_friends'));
+        return view('dashboard.user.about', compact('user', 'friends', 'current_user_friends', 'current_user'));
     }
 
     public function getAvatarAndCover($user_id){
         $user = User::findOrFail($user_id);
         $current_user = Auth::user();
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
+        $user['is_request'] = $this->isRequest($current_user->id, $user);
         $current_user_friends = self::getCurrentUserFriends();
-        return view('dashboard.user.change-cover-avatar', compact('user', 'current_user_friends'));
+        return view('dashboard.user.change-cover-avatar', compact('user', 'current_user_friends', 'current_user'));
     }
+
+    public function removeFriendById($friend_id){
+        $current_user = Auth::user();
+        $friend_id = intval($friend_id);
+        $friend1 = Friend::where('user1', $friend_id)->where('user2', $current_user->id);
+        $friend1->delete();
+        $friend2 = Friend::where('user1', $current_user->id)->where('user2', $friend_id);
+        $friend2->delete();
+        echo json_encode($friend_id);
+        die;
+    }
+
+    public function acceptRequest($friend_id){
+        $current_user = Auth::user();
+        $friend_id = intval($friend_id);
+        $friend1 = Friend::where('user1', $friend_id)->where('user2', $current_user->id);
+        $temp1 = $friend1->get();
+        if(count($temp1) == 0){
+            $friend1 = new Friend();
+            $friend1->user1 = $friend_id;
+            $friend1->user2 = $current_user->id;
+            $friend1->status = 2;
+            $friend1->save();
+        }
+        else {
+            $friend1->update(['status' => 2]);
+        }
+
+        $friend2 = Friend::where('user1', $current_user->id)->where('user2', $friend_id);
+        $temp2 = $friend2->get();
+        if(count($temp2) == 0){
+            $friend2 = new Friend();
+            $friend2->user2 = $friend_id;
+            $friend2->user1 = $current_user->id;
+            $friend2->status = 2;
+            $friend2->save();
+        }
+        else {
+            $friend2->update(['status' => 2]);
+        }
+
+        echo json_encode($friend_id);
+        die;
+    }
+
+    public function addFriend($friend_id){
+        $current_user = Auth::user();
+        $friend_id = intval($friend_id);
+        $friend1 = Friend::where('user2', $current_user->id)->where('user1', $friend_id)->get();
+        if (count($friend1) == 0){
+            $friend1 = new Friend();
+            $friend1->user2 = $current_user->id;
+            $friend1->user1 = $friend_id;
+            $friend1->status = 1;
+            $friend1->save();
+        }
+
+        echo json_encode($friend_id);
+        die;
+    }
+
 }

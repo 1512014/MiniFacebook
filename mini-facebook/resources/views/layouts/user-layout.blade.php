@@ -25,6 +25,7 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/custom-script.js"></script>
+    <script src="/js/custom-user.js"></script>
     @stack('scripts')
 
 

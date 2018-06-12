@@ -13,19 +13,26 @@
     </ul>
 
     @if($user->is_friend)
-        <div class="btn-group profile-image-buttons">
-            <button type="button" class="btn btn-default">
-                <i class="fas fa-comment"></i> Message
-            </button>
-        </div>
+        {{--<div class="btn-group profile-image-buttons">--}}
+            {{--<button type="button" class="btn btn-default">--}}
+                {{--<i class="fas fa-comment"></i> Message--}}
+            {{--</button>--}}
+        {{--</div>--}}
     @elseif($user->id != Auth::user()->id)
     <div class="btn-group profile-image-buttons">
-        <button type="button" class="btn btn-default">
-            <i class="fas fa-user-plus"></i> Add Friend
-        </button>
-        <button type="button" class="btn btn-default">
-            <i class="fas fa-comment"></i> Message
-        </button>
+        @if($user->is_request)
+            <button type="button" class="btn btn-default" disabled>
+                <i class="fas fa-user-plus"></i> Request Sent
+            </button>
+        @else
+            <button type="button" class="btn btn-default add-friend" data-user-id="{{$user->id}}">
+                <i class="fas fa-user-plus"></i> Add Friend
+            </button>
+        @endif
+
+        {{--<button type="button" class="btn btn-default">--}}
+            {{--<i class="fas fa-comment"></i> Message--}}
+        {{--</button>--}}
     </div>
     @endif
 

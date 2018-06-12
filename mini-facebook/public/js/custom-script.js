@@ -11,9 +11,7 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('.chat-popup').each(function () {
-        $(this).hide();
-    });
+
     $('.search-container input').focus(
         function() {
             $(".search-container button").css('background', '#4080ff');

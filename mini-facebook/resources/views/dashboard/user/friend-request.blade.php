@@ -55,11 +55,11 @@
             {{--Loops friends here--}}
             @if(count($requests) == 0)
                 <div class="container" style="text-align: center">
-                    There is no requests
+                    You have no requests
                 </div>
             @endif
             @foreach($requests as $request)
-            <li>
+            <li id="request-{{$request->user_data->id}}">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6">
@@ -71,10 +71,10 @@
                             </div>
                         </div>
                         <div class="col-sm-6 button-container" style="text-align: right">
-                            <button type="button" class="btn btn-default friend-list-buttons">
+                            <button type="button" class="btn btn-default friend-list-buttons accept-request" data-user-id="{{$request->user_data->id}}">
                                 <i class="fas fa-user-plus"></i> Accept
                             </button>
-                            <button type="button" class="btn btn-default friend-list-buttons">
+                            <button type="button" class="btn btn-default friend-list-buttons remove-request" data-user-id="{{$request->user_data->id}}">
                                 <i class="fas fa-trash"></i> Remove Request
                             </button>
                         </div>
