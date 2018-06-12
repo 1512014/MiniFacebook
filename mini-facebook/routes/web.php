@@ -11,29 +11,20 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('dashboard.home');
-//})->middleware('auth');
-//Route::post('/', function(){
-//    return view('dashboard.home');
-//});
-
-
 //Home page
 Route::get('/', 'PostController@index')->middleware('auth');
 
+//User pages
 Route::get('/user/{id}', 'UserController@getUserById')->middleware('auth')->name('user-detail');
 Route::get('/user/{id}/friends', 'UserController@getFriendList')->middleware('auth')->name('user-friend-list');
 Route::get('/user/{id}/requests', 'UserController@getFriendRequests')->middleware('auth')->name('user-friend-request');
 Route::get('/user/{id}/about', 'UserController@getAbout')->middleware('auth')->name('user-about');
 Route::get('/user/{id}/avatar-cover', 'UserController@getAvatarAndCover')->middleware('auth')->name('user-avatar-cover');
 
-//Route::get('/user/{id}', 'UserController@getPostByUser')->middleware('auth')->name('user-friend');
-//Route::post('/user/{id}', function(){
-//    return view('dashboard.user-detail');
-//});
-
-
+//Message
+//Route::get('/message/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
+Route::get('/messages', 'MessageController@getNewMessages')->middleware('auth')->name('get-new-message');
+Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
 
 Auth::routes();
 

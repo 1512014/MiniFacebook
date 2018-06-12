@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MiniFacebook</title>
 
     <!-- Fonts -->
@@ -22,25 +23,14 @@
 
     <!-- Script -->
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/custom-script.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/custom-script.js"></script>
     @stack('scripts')
 
 
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    {{--@if (Route::has('login'))--}}
-        {{--<div class="top-right links">--}}
-            {{--@auth--}}
-            {{--<a href="{{ url('/home') }}">Home</a>--}}
-            {{--@else--}}
-                {{--<a href="{{ route('login') }}">Login</a>--}}
-                {{--<a href="{{ route('register') }}">Register</a>--}}
-                {{--@endauth--}}
-        {{--</div>--}}
-    {{--@endif--}}
-
     <nav class="navbar navbar-dark bg-primary topnav">
         <!-- Navbar content -->
         <div class="container">
@@ -90,7 +80,10 @@
         </div>
     </nav>
 
-    <div class="friend-panel">
+    <p class="friend-panel-collapse" data-toggle="collapse" data-target="#friend-panel" aria-expanded="false">Hide Panel</p>
+
+    <div id="friend-panel" class="friend-panel collapse show">
+        <p class="panel-title">Friend Panel</p>
         <p class="list-title">CONTACTS</p>
         <ul class="panel-list">
             @yield('contacts')
@@ -100,7 +93,7 @@
             @yield('groups')
         </ul>
         <div class="search-contact">
-            <
+
         </div>
     </div>
     @section('sidebar')
@@ -114,10 +107,10 @@
         <div class="newfeed">
             @yield('content')
         </div>
-
-
     </div>
 
+    {{--@yield('popup-chat')--}}
+    @include('partial.chat-popup')
 
 
 </div>

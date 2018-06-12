@@ -1,13 +1,14 @@
 /*Friend panel*/
 .friend-panel {
     position: absolute;
-    top: 42px;
-    right: 10px;
+    right: 15px;
     bottom: 0;
     overflow-y: scroll;
-    height: 95vh;
+    height: 93vh;
+    background: #e9ebee;
     border-left: 1px solid #c5c5c5;
     width: 200px;
+    z-index: 100;
 }
 
 .friend-panel .list-title {
@@ -165,7 +166,14 @@ ul.friend-option li:last-child {
 @media screen and (max-width: 950px) {
 
     .friend-panel {
-        display: none;
+        height: 334px;
+    }
+    .friend-panel .panel-title {
+        display: block;
+    }
+
+    .friend-panel-collapse {
+        display: block;
     }
     .profile-images {
         margin: auto;

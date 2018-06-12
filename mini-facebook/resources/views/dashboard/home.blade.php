@@ -8,70 +8,7 @@
 @endpush
 
 @section('contacts')
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-
-
-
+    @include('partial.contacts')
 @endsection
 
 @section('groups')
@@ -135,7 +72,7 @@
             <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
                 <div class="col-sm-7">
                     <img src="{{$post->post_author->avatar}}" class="avatar">
-                    <a href="#"><span class="user-name">{{$post->post_author->name}}</span></a>
+                    <a href="{{route('user-detail', ['id' => $post->post_author->id])}}"><span class="user-name">{{$post->post_author->name}}</span></a>
                 </div>
                 @if($post->user_id === $current_user->id)
                 <div class="col-sm-2">
@@ -196,7 +133,7 @@
                     <img src="{{$comment->comment_author->avatar}}" class="avatar">
                 </div>
                 <div class="col-sm-11">
-                    <p> <a href="#"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
+                    <p> <a href="{{route('user-detail', ['id' => $comment->comment_author->id])}}"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
                 </div>
             </div>
             {{--End loop comments--}}

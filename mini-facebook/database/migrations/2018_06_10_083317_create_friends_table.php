@@ -17,6 +17,7 @@ class CreateFriendsTable extends Migration
             $table->increments('id');
             $table->integer('user1');
             $table->integer('user2');
+            $table->integer('status');
             $table->timestamps();
         });
     }

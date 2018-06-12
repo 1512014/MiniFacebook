@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('.image-upload').hide();
             $('.image-show').hide();
             $('.post-action').hide();
-            $('div.write-post').animate({ height: 120 }, 'slow');
+            $('div.write-post').animate({ height: 142 }, 'slow');
         }
     });
 });

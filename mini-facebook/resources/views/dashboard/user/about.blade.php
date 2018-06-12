@@ -11,69 +11,7 @@
 @endpush
 
 @section('contacts')
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-
-
+    @include('partial.contacts')
 
 @endsection
 
@@ -110,11 +48,15 @@
 @endsection
 
 @section('profile-images')
-    @include('layouts.profile-images')
+    @include('partial.profile-images')
 @endsection
 
 @section('content')
     <div class="about">
-        <h1>Hello</h1>
+        @if(!$user->about)
+            <p>Nothing here</p>
+        @else
+        <pre style="padding: 20px;">{{$user->about}}</pre>
+        @endif
     </div>
 @endsection

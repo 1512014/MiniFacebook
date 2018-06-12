@@ -73,7 +73,14 @@
 @media screen and (max-width: 950px) {
 
     .friend-panel {
-        display: none;
+        height: 334px;
+    }
+    .friend-panel .panel-title {
+        display: block;
+    }
+
+    .friend-panel-collapse {
+        display: block;
     }
     .profile-images {
         margin-left: auto ;
@@ -92,4 +99,11 @@
         max-width: 660px;
         width: 660px;
     }
+}
+
+.mutual-friend{
+    line-height: 100px;
+    margin-right: 20px;
+    font-weight: 600;
+
 }

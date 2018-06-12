@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Friend;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class PostController extends Controller
             $author = User::where('id', $post->user_id)->first();
             $post['post_author'] = $author;
         }
-        return view('dashboard.home', compact('posts', 'current_user'));
+        $current_user_friends = UserController::getCurrentUserFriends();
+        return view('dashboard.home', compact('posts', 'current_user', 'current_user_friends'));
     }
 
     /**
