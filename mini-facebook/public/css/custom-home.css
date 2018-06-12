@@ -99,3 +99,17 @@ ul.react li {
 .comment-container {
     padding-bottom: 20px;
 }
+
+.comment-item .comment-action .btn-group{
+    float: right;
+    padding-top: -20px;
+}
+
+.comment-item .comment-action button{
+    display: inline-block;
+    font-size: 10px;
+}
+
+p.comment-content{
+    margin: 0;
+}

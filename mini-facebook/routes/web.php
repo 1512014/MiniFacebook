@@ -24,6 +24,8 @@ Route::post('/friends/delete/{id}', 'UserController@removeFriendById')->middlewa
 Route::post('/friends/accept/{id}', 'UserController@acceptRequest')->middleware('auth')->name('accept-request');
 Route::post('/friends/add/{id}', 'UserController@addFriend')->middleware('auth')->name('add-friend');
 
+Route::post('/comments/create', 'CommentController@addNewComment')->middleware('auth')->name('add-comment');
+
 //Message
 //Route::get('/message/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
 Route::get('/messages', 'MessageController@getNewMessages')->middleware('auth')->name('get-new-message');
@@ -32,4 +34,3 @@ Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('
 Auth::routes();
 
 Route::resource('posts', 'PostController')->middleware('auth');
-Route::resource('comments', 'CommentController')->middleware('auth');

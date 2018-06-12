@@ -67,7 +67,7 @@
 
     {{--Add loop posts here--}}
     @foreach ($posts as $post)
-    <div class="post-item">
+    <div class="post-item" id="post-item-{{$post->id}}">
         <div class="container-fluid">
             <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
                 <div class="col-sm-7">
@@ -118,7 +118,7 @@
                     <img src="{{$current_user->avatar}}" class="avatar">
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="comment form-control" placeholder="Leave a comment...">
+                    <input type="text" class="comment form-control" placeholder="Leave a comment..." data-post-id="{{$post->id}}" data-user-id="{{$current_user->id}}">
                 </div>
                 <div class="col-sm-1" style="text-align: center; font-size: 13px; padding: 0">
                     <button type="button" class="upload btn btn-default"><i class="fas fa-camera"></i></button>
@@ -126,18 +126,37 @@
 
             </div>
 
-            @foreach($post->comments as $comment)
-            {{--Add loops comments here--}}
-            <div class="row comment-item">
-                <div class="col-sm-1">
-                    <img src="{{$comment->comment_author->avatar}}" class="avatar">
-                </div>
-                <div class="col-sm-11">
-                    <p> <a href="{{route('user-detail', ['id' => $comment->comment_author->id])}}"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
-                </div>
+            <div class="show-comment-container">
+                @foreach($post->comments as $comment)
+                    {{--Add loops comments here--}}
+                    <div class="row comment-item">
+                        <div class="col-sm-1">
+                            <img src="{{$comment->comment_author->avatar}}" class="avatar">
+                        </div>
+                        <div class="col-sm-11">
+                            <p class="comment-content"><a href="{{route('user-detail', ['id' => $comment->comment_author->id])}}"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
+                        </div>
+
+                        @if($comment->comment_author->id == $current_user->id)
+                        <div class="col-sm-12">
+                            <div class="comment-action">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+
+                    </div>
+                    {{--End loop comments--}}
+                @endforeach
             </div>
-            {{--End loop comments--}}
-            @endforeach
 
 
         </div>
