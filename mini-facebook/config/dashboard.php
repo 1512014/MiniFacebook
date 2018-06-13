@@ -11,6 +11,13 @@ return [
 
         'friend-request' => [
 
+        ],
+
+        'message' => [
+            'is_new' => [
+                'new' => 1,
+                'old' => 0
+            ]
         ]
     ]
 ];

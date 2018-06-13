@@ -144,7 +144,7 @@ $(document).ready(function () {
 
     $('button.delete-comment').on('click', function () {
         commentId = $(this).data('comment-id');
-        url = "comments/"+commentId;
+        url = "/comments/"+commentId;
 
         confirmDelete = confirm('Are you sure?');
         if (confirmDelete){
@@ -167,7 +167,7 @@ $(document).ready(function () {
     $('button.edit-comment').on('click', function () {
         $('.comment-item').show();
         commentId = $(this).data('comment-id');
-        url = "comments/"+commentId;
+        url = "/comments/"+commentId;
 
         $.ajax({
             url: url,

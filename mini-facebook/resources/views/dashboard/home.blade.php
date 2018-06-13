@@ -12,29 +12,7 @@
 @endsection
 
 @section('groups')
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
+    @include('partial.groups')
 @endsection
 
 @section('sidebar')
@@ -71,7 +49,10 @@
         <div class="container-fluid">
             <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
                 <div class="col-sm-7">
-                    <img src="{{$post->post_author->avatar}}" class="avatar">
+                    <div class="avatar-container-large">
+                        <img src="{{$post->post_author->avatar}}" class="avatar">
+                    </div>
+
                     <a href="{{route('user-detail', ['id' => $post->post_author->id])}}"><span class="user-name">{{$post->post_author->name}}</span></a>
                 </div>
                 @if($post->user_id === $current_user->id)
@@ -115,7 +96,10 @@
 
             <div class="row comment-container">
                 <div class="col-sm-1">
-                    <img src="{{$current_user->avatar}}" class="avatar">
+                    <div class="avatar-container">
+                        <img src="{{$current_user->avatar}}" class="avatar">
+                    </div>
+
                 </div>
                 <div class="col-sm-10">
                     <input type="text" class="comment form-control" placeholder="Leave a comment..." data-post-id="{{$post->id}}" data-user-id="{{$current_user->id}}">
@@ -131,7 +115,9 @@
                     {{--Add loops comments here--}}
                     <div class="row comment-item">
                         <div class="col-sm-1">
-                            <img src="{{$comment->comment_author->avatar}}" class="avatar">
+                            <div class="avatar-container">
+                                <img src="{{$comment->comment_author->avatar}}" class="avatar">
+                            </div>
                         </div>
                         <div class="col-sm-11">
                             <p class="comment-content"><a href="{{route('user-detail', ['id' => $comment->comment_author->id])}}"><span class="comment-owner">{{$comment->comment_author->name}}</span></a>{{$comment->comment_content}}</p>
@@ -159,7 +145,7 @@
             </div>
 
 
-        </div>
+    </div>
     </div>
     @endforeach
     {{--End loop posts--}}

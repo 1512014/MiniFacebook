@@ -29,6 +29,25 @@ img.avatar{
     width: 40px;
 }
 
+.avatar-container-large{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    float: left;
+}
+
+.avatar-container{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    float: left;
+}
+
+li.contact-item img {
+    margin: 0!important;
+    height: 30px;
+}
+
 .comment-container img.avatar {
     width: 30px;
 }
@@ -114,3 +133,4 @@ ul.react li {
 p.comment-content{
     margin: 0;
 }
+

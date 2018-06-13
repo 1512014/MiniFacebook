@@ -17,29 +17,7 @@
 @endsection
 
 @section('groups')
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li><li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
-    <li>
-        <img src="/img/user1.png">
-        <span class="name">Huynh Hong An</span>
-    </li>
+    @include('partial.groups')
 @endsection
 
 @section('sidebar')

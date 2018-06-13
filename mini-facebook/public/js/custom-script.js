@@ -89,6 +89,15 @@ $(document).ready(function () {
         $('.chat-popup').hide().removeClass('active');
     });
 
+    $('.submit-new-group').on('click',function () {
+        checked = $("input[type=checkbox]:checked").length;
+
+        if(!checked) {
+            alert("You must choose at least one friend");
+            return false;
+        }
+    });
+
     setInterval(getMessages, 1000);
 });
 

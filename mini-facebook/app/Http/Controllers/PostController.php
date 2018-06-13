@@ -30,7 +30,8 @@ class PostController extends Controller
             $post['post_author'] = $author;
         }
         $current_user_friends = UserController::getCurrentUserFriends();
-        return view('dashboard.home', compact('posts', 'current_user', 'current_user_friends'));
+        $groups = GroupController::getCurrentUserGroups();
+        return view('dashboard.home', compact('posts', 'current_user', 'current_user_friends', 'groups'));
     }
 
     /**
