@@ -106,18 +106,32 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 data: formData,
                 success: function(response){
-                    currentUser = JSON.parse(response);
-                    console.log(currentUser);
+                    data = JSON.parse(response);
+                    console.log(data.comment.id);
                     console.log("success");
                     $('#post-item-' + postId + ' .show-comment-container').prepend(
                         '<div class="row comment-item">' +
                         '<div class="col-sm-1">' +
-                        '<img src="' + currentUser.avatar + '" class="avatar">' +
+                        '<img src="' + data.current_user.avatar + '" class="avatar">' +
                         '</div>' +
                         '<div class="col-sm-11">' +
-                        '<p> <a href="/users/' + currentUser.id + '"><span class="comment-owner">' + currentUser.name + '</span></a>' + commentContent + '</p>' +
+                        '<p class="comment-content"> <a href="/users/' + data.current_user.id + '"><span class="comment-owner">' + data.current_user.name + '</span></a>' + commentContent + '</p>' +
+                        '</div>' +
+                        '' +
+                        '<div class="col-sm-12">' +
+                        '<div class="comment-action">' +
+                        ' <div class="btn-group">' +
+                        '<button type="button" class="btn btn-default edit-comment" data-comment-id="'+data.comment.id+'">' +
+                        ' <i class="fas fa-edit"></i>' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-default delete-comment" data-comment-id="'+data.comment.id+'">' +
+                        '<i class="fas fa-trash-alt"></i>' +
+                        '</button>' +
+                        '</div>' +
+                        '</div>' +
                         '</div>' +
                         '</div>'
+
                     );
                 },
                 error: function (req, status, err) {
@@ -125,6 +139,62 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+
+    $('button.delete-comment').on('click', function () {
+        commentId = $(this).data('comment-id');
+        url = "comments/"+commentId;
+
+        confirmDelete = confirm('Are you sure?');
+        if (confirmDelete){
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json',
+                success: function(response){
+                    data = JSON.parse(response);
+                    console.log("success");
+                    $('button.delete-comment[data-comment-id='+commentId+']').parents('.comment-item').remove();
+                },
+                error: function (req, status, err) {
+                    console.log('Something went wrong', status, err);
+                }
+            });
+        }
+    });
+
+    $('button.edit-comment').on('click', function () {
+        $('.comment-item').show();
+        commentId = $(this).data('comment-id');
+        url = "comments/"+commentId;
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            success: function(response){
+                data = JSON.parse(response);
+                $('input.comment').val(data.comment_content);
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            contentType: 'application/json',
+            success: function(response){
+                data = JSON.parse(response);
+                console.log("success");
+                $('button.delete-comment[data-comment-id='+commentId+']').parents('.comment-item').remove();
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
     });
 
 });

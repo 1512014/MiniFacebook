@@ -141,10 +141,10 @@
                         <div class="col-sm-12">
                             <div class="comment-action">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default edit-comment" data-comment-id="{{$comment->id}}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-default">
+                                    <button type="button" class="btn btn-default delete-comment" data-comment-id="{{$comment->id}}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>

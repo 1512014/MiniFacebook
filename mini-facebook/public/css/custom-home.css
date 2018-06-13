@@ -108,6 +108,7 @@ ul.react li {
 .comment-item .comment-action button{
     display: inline-block;
     font-size: 10px;
+    background-color: #efefef;
 }
 
 p.comment-content{
