@@ -60,11 +60,16 @@
                     <span class="posted-time">8 hrs</span>
                 </div>
                 <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary btn-edit-post" style="float: left; margin-left: 10px"><i class="fas fa-edit"></i></button>
                     <form action="{{ route('posts.destroy' , $post->id)}}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger btn-delete-post" onclick="return confirm('Are you sure?')">Delete Post</button>
+                        <button type="submit" class="btn btn-danger btn-delete-post" onclick="return confirm('Are you sure?')" style="float:left; margin-left: 10px">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </form>
+
+
 
                 </div>
                 @else

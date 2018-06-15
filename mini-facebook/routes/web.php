@@ -41,6 +41,7 @@ Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('
 //Group
 Route::get('/groups', 'GroupController@getCurrentUserGroups')->middleware('auth');
 Route::get('/groups/{id}/users', 'GroupController@getUsersByGroup')->middleware('auth');
+//Route::post('/groups/{id}', 'GroupController@editGroup')->middleware('auth')->name('edit-group');
 Route::post('/groups', 'GroupController@addNewGroup')->middleware('auth');
 Route::post('/groups/delete/{id}', 'GroupController@deleteGroup')->middleware('auth')->name('delete-group');
 

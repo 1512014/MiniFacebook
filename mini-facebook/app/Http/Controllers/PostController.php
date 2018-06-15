@@ -20,7 +20,14 @@ class PostController extends Controller
     {
         //
         $current_user = Auth::user();
-        $posts = Post::orderBy('id','desc')->take(10)->get();
+        $current_user_friends = UserController::getCurrentUserFriends();
+        $friend_ids = [$current_user->id];
+        foreach ($current_user_friends as $current_user_friend){
+            array_push($friend_ids, $current_user_friend->user_data->id);
+        }
+//        dd($current_user_friends);
+//        dd($friend_ids);
+        $posts = Post::whereIn('user_id', $friend_ids)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
             foreach ($post['comments'] as $comment){
@@ -29,7 +36,6 @@ class PostController extends Controller
             $author = User::where('id', $post->user_id)->first();
             $post['post_author'] = $author;
         }
-        $current_user_friends = UserController::getCurrentUserFriends();
         $groups = GroupController::getCurrentUserGroups();
         return view('dashboard.home', compact('posts', 'current_user', 'current_user_friends', 'groups'));
     }
