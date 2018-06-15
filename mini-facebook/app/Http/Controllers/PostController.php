@@ -58,9 +58,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $input = $request->all();
-//        dd($input);
         $image = $request->file('image');
         if($image){
             $path = public_path(). '/img/posts/';
@@ -107,6 +105,23 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->all();
+        $image = $request->file('image');
+        if($image){
+            $path = public_path(). '/img/posts/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $input['image_path'] = '/img/posts/' .  $filename;
+        }
+        else {
+            $post = Post::findOrFail($id);
+            $input['image_path'] = $post->image_path;
+        }
+
+        $post = Post::where('id', $id);
+        $post->update($input);
+        return redirect()->back();
     }
 
     /**
@@ -119,10 +134,29 @@ class PostController extends Controller
     {
 
         $post = Post::findOrFail($id);
+        $comments = Comment::where('post_id', $id);
 
         $post->delete();
+        $comments->delete();
 
         return redirect(route('posts.index'));
+    }
+
+    public function getPostById($post_id){
+        $post = Post::findOrFail($post_id);
+
+        echo json_encode($post);
+        die;
+    }
+
+    public function updateContent(Request $request){
+        $input = json_decode($request->getContent(), true);
+
+        $post = Post::where('id', $input['post_id']);
+        $post->update(['post_content' => $input['post_content']]);
+        $post = $post->first();
+        echo json_encode($post);
+        die;
     }
 
 

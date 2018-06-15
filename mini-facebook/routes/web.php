@@ -13,6 +13,8 @@
 
 //Home page
 Route::get('/', 'PostController@index')->middleware('auth');
+Route::get('/posts/{id}', 'PostController@getPostById')->middleware('auth');
+Route::post('/posts/{id}', 'PostController@updateContent')->middleware('auth');
 
 //Post
 Route::resource('posts', 'PostController')->middleware('auth');

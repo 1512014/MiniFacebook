@@ -31,6 +31,7 @@
 
 </head>
 <body>
+@include('partial.chat-popup')
 <div class="flex-center position-ref full-height">
     <nav class="navbar navbar-dark bg-primary topnav">
         <!-- Navbar content -->
@@ -113,8 +114,6 @@
         </div>
     </div>
 
-    {{--@yield('popup-chat')--}}
-    @include('partial.chat-popup')
 
 
 </div>

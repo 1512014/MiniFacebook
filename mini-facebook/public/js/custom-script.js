@@ -43,6 +43,7 @@ $(document).ready(function () {
     $('li.contact-item').each(function () {
         $(this).on('click', function () {
             index = $(this).index();
+            console.log(index);
             $('.popup').removeClass('active').hide();
             var userId = ($(this).data('user-id'));
             $('#chat-popup-' + userId).show().addClass('active');
@@ -167,6 +168,58 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+
+    $('.btn-edit-post').on('click', function () {
+        var postId = $(this).data('post-id');
+        postSelector = $('#post-item-' + postId);
+        var url = '/posts/' + postId;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            success: function(response){
+                post = JSON.parse(response);
+                postSelector.find('.content-container p').hide();
+                postSelector.find('textarea.update-content').val(post['post_content']);
+                postSelector.find('.update-area').css('display', 'block');
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+
+    });
+
+    $('.cancel-update-post').on('click', function () {
+        var postId = $(this).data('post-id');
+        postSelector = $('#post-item-' + postId);
+        postSelector.find('.update-area').css('display', 'none');
+        postSelector.find('.content-container p').show();
+    });
+
+    $('.update-post').on('click', function () {
+        var postId = $(this).data('post-id');
+        postSelector = $('#post-item-' + postId);
+        postContent = postSelector.find('textarea.update-content').val();
+        var url = '/posts/' + postId;
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                post_id: postId,
+                post_content: postContent
+            }),
+            success: function(response){
+                post = JSON.parse(response);
+                postSelector.find('.content-container .col-sm-12').append('<p>' + post['post_content'] + '</p>');
+                postSelector.find('.update-area').css('display', 'none');
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
     });
 
     setInterval(getMessages, 1000);

@@ -22,13 +22,14 @@
 @endsection
 
 @section('content')
-    <div class="write-post">
+    <div class="post write-post">
         {!! Form::open(['method'=>'POST', 'action'=>'PostController@store', 'id'=>'post', 'enctype'=>'multipart/form-data']) !!}
         {{ csrf_field() }}
 
         <div class="form-group post-content">
             {!! Form::textarea('post_content', null, ['class'=>'form-control', 'placeholder' => 'What\'s in your mind...', 'id'=>'content', 'rows'=>3]) !!}
             {!! Form::hidden('user_id', $current_user->id) !!}
+
         </div>
 
         <div class="form-group image-upload">
@@ -38,7 +39,13 @@
 
         <div class="form-group post-action">
             {!! Form::submit('Post', ['class'=>'btn btn-primary post-btn']) !!}
+
         </div>
+
+        {{--<div class="form-group update-action">--}}
+            {{--{!! Form::button('Update', ['class'=>'btn btn-primary update-btn']) !!}--}}
+            {{--{!! Form::button('Cancel', ['class'=>'btn btn-primary cancel-btn']) !!}--}}
+        {{--</div>--}}
 
         {!! Form::close() !!}
     </div>
@@ -60,7 +67,9 @@
                     <span class="posted-time">8 hrs</span>
                 </div>
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-primary btn-edit-post" style="float: left; margin-left: 10px"><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-primary btn-edit-post" style="float: left; margin-left: 10px" data-post-id="{{$post->id}}">
+                        <i class="fas fa-edit"></i>
+                    </button>
                     <form action="{{ route('posts.destroy' , $post->id)}}" method="POST">
                         <input name="_method" type="hidden" value="DELETE">
                         {{ csrf_field() }}
@@ -80,6 +89,13 @@
             </div>
             <div class="row content-container">
                 <div class="col-sm-12">
+                    <div class="update-area">
+                        <textarea class="form-control update-content" row="3"></textarea>
+                        <div class="update-action">
+                            <button class="btn btn-default cancel-update-post" data-post-id="{{$post->id}}">Cancel</button>
+                            <button class="btn btn-primary update-post" data-post-id="{{$post->id}}">Update</button>
+                        </div>
+                    </div>
                     <p>{{$post->post_content}}</p>
                 </div>
             </div>
@@ -132,7 +148,7 @@
                         <div class="col-sm-12">
                             <div class="comment-action">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default edit-comment" data-comment-id="{{$comment->id}}">
+                                    <button type="button" class="btn btn-default edit-comment" data-comment-id="{{$comment->id}}" data-post-id="{{$post->id}}">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button type="button" class="btn btn-default delete-comment" data-comment-id="{{$comment->id}}">

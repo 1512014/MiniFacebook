@@ -167,6 +167,7 @@ $(document).ready(function () {
     $('button.edit-comment').on('click', function () {
         $('.comment-item').show();
         commentId = $(this).data('comment-id');
+        postId = $(this).data('post-id');
         url = "/comments/"+commentId;
 
         $.ajax({
@@ -175,7 +176,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function(response){
                 data = JSON.parse(response);
-                $('input.comment').val(data.comment_content);
+                $('#post-item-' + postId).find('input.comment').val(data.comment_content).focus();
             },
             error: function (req, status, err) {
                 console.log('Something went wrong', status, err);

@@ -627,6 +627,15 @@ input:focus:-ms-input-placeholder {
     margin-top:10px;
 }
 
+.update-action{
+    text-align: right;
+    margin-top: 10px;
+}
+
+.update-area {
+    margin-bottom: 20px;
+    display: none;
+}
 
 @media screen and (max-width: 992px) {
     .topnav input[type=text] {
