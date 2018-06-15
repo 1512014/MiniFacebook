@@ -356,6 +356,8 @@ li.icon a:hover{
     text-decoration: underline;
 }
 
+
+
 .popup-header .close-popup {
     font-size: 20px;
     padding-right: 10px;
@@ -435,6 +437,28 @@ li.contact-item span.name{
     line-height: 30px;
     padding-left: 5px;
 }
+
+li.group-item {
+    margin: 10px;
+}
+li.group-item .avatar-container {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    float: left;
+}
+
+li.group-item img {
+    margin: 0!important;
+    height: 30px;
+}
+
+li.group-item span.name{
+    line-height: 30px;
+    padding-left: 5px;
+}
+
+
 .chat-popup .popup-input{
     height: 61px;
     padding: 5px;
@@ -518,6 +542,91 @@ input:focus:-ms-input-placeholder {
     background-color: #dcdee1!important;
     color: #008aa1!important;
 }
+
+.group-popup {
+    position: absolute;
+    right: 240px;
+    bottom: 0;
+    width: 260px;
+    height: 334px;
+    background-color: white;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+
+}
+
+.group-popup .popup-header{
+    background-color: #00cae2;
+    height: 26px;
+    line-height: 26px;
+    width: 260px;
+    font-size: 14px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.group-popup .popup-header:hover {
+    background-color: #00b1cd;
+    color: black;
+}
+
+.group-popup .popup-header a {
+    text-decoration: none;
+    color: #3a3a3a;
+}
+
+.group-popup .popup-input{
+    height: 61px;
+    padding: 5px;
+    /*line-height: 61px;*/
+    border-top: 1px solid #aaaaaa;
+}
+
+.group-popup .popup-input input{
+    font-size: 13px;
+    float: left;
+    width: 80%;
+    border: none;
+    padding-left: 5px;
+
+}
+
+.group-popup .popup-header a:hover{
+    text-decoration: underline;
+}
+
+.group-popup .popup-content{
+    padding: 8px;
+    top: 26px;
+    left: 0;
+    height: 247px;
+    width: 260px;
+    overflow-y: scroll;
+}
+
+.group-popup .popup-input input:focus{
+    outline: none!important;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.group-popup .popup-input button{
+    font-size: 13px;
+    float: right
+}
+
+.edit-group {
+    float: right;
+    margin-right: 10px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.edit-group:first-child{
+    margin-top:10px;
+}
+
 
 @media screen and (max-width: 992px) {
     .topnav input[type=text] {

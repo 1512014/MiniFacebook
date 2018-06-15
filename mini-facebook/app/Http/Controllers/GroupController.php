@@ -20,6 +20,8 @@ class GroupController extends Controller
 
                 if ($current_user->id == $user_id){
                     $group['users'] = self::getUsersByGroup($group->id);
+                    $group['messages'] = MessageController::getGroupMessages($group->id);
+
                     array_push($results, $group);
                 }
             }

@@ -71,6 +71,51 @@ class MessagesTableSeeder extends Seeder
                 'received_user' => 1,
                 'message_content' => str_random(10) . ' ' . str_random(10)
             ],
+            [
+                'sent_user' => 2,
+                'received_user' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 2,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 2,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 1,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 4,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 4,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 3,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 1,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ],
+            [
+                'sent_user' => 3,
+                'group_id' => 1,
+                'message_content' => str_random(10) . ' ' . str_random(10)
+            ]
         ];
 
         foreach ($messages as $message){

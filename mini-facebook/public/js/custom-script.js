@@ -24,17 +24,17 @@ $(document).ready(function () {
         $('.popup-content').scrollTop($('.popup-content')[0].scrollHeight);
     });
 
-    $('.chat-popup .popup-header').on('click', function () {
-        if ($(this).parents('.chat-popup').find('.popup-content').is(":visible")){
-            $(this).parents('.chat-popup').find('.popup-content').fadeOut();
-            $(this).parents('.chat-popup').find('.popup-input').fadeOut();
-            $(this).parents('.chat-popup').animate({ height: 26 }, 'medium')
+    $('.popup .popup-header').on('click', function () {
+        if ($(this).parents('.popup').find('.popup-content').is(":visible")){
+            $(this).parents('.popup').find('.popup-content').fadeOut();
+            $(this).parents('.popup').find('.popup-input').fadeOut();
+            $(this).parents('.popup').animate({ height: 26 }, 'medium')
         }
         else {
-            $(this).parents('.chat-popup').animate({ height: 334 }, 'fast');
-            $(this).parents('.chat-popup').find('.popup-content').fadeIn(500);
-            $(this).parents('.chat-popup').find('.popup-input').fadeIn();
-            $(this).parents('.chat-popup').find('input').focus();
+            $(this).parents('.popup').animate({ height: 334 }, 'fast');
+            $(this).parents('.popup').find('.popup-content').fadeIn(500);
+            $(this).parents('.popup').find('.popup-input').fadeIn();
+            $(this).parents('.popup').find('input').focus();
         }
     });
 
@@ -43,11 +43,26 @@ $(document).ready(function () {
     $('li.contact-item').each(function () {
         $(this).on('click', function () {
             index = $(this).index();
-            $('.chat-popup').hide();
+            $('.popup').removeClass('active').hide();
             var userId = ($(this).data('user-id'));
             $('#chat-popup-' + userId).show().addClass('active');
+            $('#chat-popup-' + userId + ' input').focus();
             $('.popup-content').scrollTop($('.popup-content')[index].scrollHeight);
             // showPopup('#chat-popup-' + userId);
+        });
+    });
+
+    $('li.group-item').each(function () {
+        $(this).on('click', function () {
+            index = $(this).index();
+            index = Math.floor(index/2);
+            $('.popup').removeClass('active').hide();
+            var groupId = ($(this).data('group-id'));
+            console.log('groupId: ' + groupId);
+            console.log(index);
+            $('#group-popup-'+groupId).show().addClass('active');
+            $('#group-popup-'+groupId +' input').focus();
+            $('.group-popup .popup-content').scrollTop($('.group-popup .popup-content')[index].scrollHeight);
         });
     });
 
@@ -85,8 +100,43 @@ $(document).ready(function () {
         }
     });
 
+    $('.group-popup input').keypress(function (e) {
+        if (e.which == 13) {
+            var messageContent = $(this).val();
+            var groupId = $(this).data('group-id');
+            var url = '/messages/create';
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                type: 'POST',
+                data: JSON.stringify({
+                    message_content: messageContent,
+                    group_id: groupId
+                }),
+                success: function(response){
+                    result = JSON.parse(response);
+                    console.log(result);
+                    $('.group-popup input').val('');
+                    // $('.chat-popup .popup-content').append(
+                    //     '<div class="row current-user" data-message-id="'+ result['id'] +'">' +
+                    //     '<div class="col-sm-12">' +
+                    //     '<p class="message">' + result['message_content'] + '</p>' +
+                    //     '</div>' +
+                    //     '</div>'
+                    // );
+
+                },
+                error: function (req, status, err) {
+                    console.log('Something went wrong', status, err);
+                }
+            });
+            return false;
+        }
+    });
+
     $('.close-popup').on('click',function () {
         $('.chat-popup').hide().removeClass('active');
+        $('.group-popup').hide().removeClass('active');
     });
 
     $('.submit-new-group').on('click',function () {
@@ -104,7 +154,6 @@ $(document).ready(function () {
 function getMessages() {
     if ($('.chat-popup').is(":visible")){
         userId = $('.chat-popup.active').data('user-id');
-        console.log(userId);
         var url = '/messages';
         var userAvatar = $('.chat-popup.active').data('user-avatar');
         console.log('User Avatar: ' + userAvatar);
@@ -125,8 +174,6 @@ function getMessages() {
                 results = JSON.parse(response);
                 for (var i = 0; i< results.length; i++){
                     if($.inArray(results[i]['id'], messageIds) == -1) {
-                        console.log("not in here");
-                        console.log('query: ' + '#chat-popup' + userId + ' .popup-content');
                         if (results[i]['sent_user'] == currentUserId) {
                             $('#chat-popup-' + userId + ' .popup-content').append(
                                 '<div class="row current-user"  data-message-id="' + results[i]['id'] + '">' +
@@ -149,6 +196,57 @@ function getMessages() {
                             );
                         }
                         $('#chat-popup-' + userId).find('.popup-content').scrollTop($('#chat-popup-' + userId).find('.popup-content')[0].scrollHeight);
+                    }
+                }
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+    }
+
+    if ($('.group-popup').is(":visible")){
+        groupId = $('.group-popup.active').data('group-id');
+        var url = '/messages/group';
+        var currentUserId = $('#current_user_id').val();
+        var messageIds = [];
+        $('#group-popup-' + groupId).find('.row').each(function () {
+            messageIds.push($(this).data('message-id'));
+        });
+
+        $.ajax({
+            url: url,
+            contentType: 'application/json',
+            type: 'GET',
+            data: {
+                group_id: groupId
+            },
+            success: function(response){
+                results = JSON.parse(response);
+                for (var i = 0; i< results.length; i++){
+                    if($.inArray(results[i]['id'], messageIds) == -1) {
+                        if (results[i]['sent_user'] == currentUserId) {
+                            $('#group-popup-' + groupId + ' .popup-content').append(
+                                '<div class="row current-user"  data-message-id="' + results[i]['id'] + '">' +
+                                '<div class="col-sm-12">' +
+                                '<p class="message">' + results[i]['message_content'] + '</p>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                        else {
+                            $('#group-popup-' + groupId + ' .popup-content').append(
+                                '<div class="row other-user"  data-message-id="'+ results[i]['id'] +'">' +
+                                '<div class="col-sm-2">' +
+                                '<img src="' + results[i]['sent_user_data']['avatar'] + '">' +
+                                '</div>' +
+                                '<div class="col-sm-10">' +
+                                '<p class="message">' + results[i]['message_content'] + '</p>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                        $('#group-popup-' + groupId).find('.popup-content').scrollTop($('#group-popup-' + groupId).find('.popup-content')[0].scrollHeight);
                     }
                 }
             },

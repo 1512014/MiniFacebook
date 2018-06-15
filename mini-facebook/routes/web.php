@@ -34,6 +34,7 @@ Route::put('/comments/{id}', 'CommentController@updateComment')->middleware('aut
 Route::delete('/comments/{id}', 'CommentController@deleteComment')->middleware('auth')->name('delete-comment');
 
 //Message
+Route::get('/messages/group', 'MessageController@getNewGroupMessages')->middleware('auth')->name('get-new-group-message');
 Route::get('/messages', 'MessageController@getNewMessages')->middleware('auth')->name('get-new-message');
 Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
 
