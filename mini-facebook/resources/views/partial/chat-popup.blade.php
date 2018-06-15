@@ -46,7 +46,7 @@
         <div class="popup-header">
         <span class="user-name">
             <a href="{{route('user-detail', ['id' => $current_user_friend->user_data->id])}}">
-                {{substr($group->name, 0, 15) . '...'}}
+                {{ (strlen($group->name) > 20)? substr($group->name, 0, 20) . '...' : $group->name}}
             </a>
         </span>
             <span class="close-popup">&times;</span>

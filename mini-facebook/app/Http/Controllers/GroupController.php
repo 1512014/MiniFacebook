@@ -68,4 +68,11 @@ class GroupController extends Controller
 
         return redirect()->back();
     }
+
+    public function deleteGroup($group_id){
+        $group = Group::where('id', $group_id);
+        $group->delete();
+        echo json_encode($group_id);
+        die;
+    }
 }

@@ -55,14 +55,13 @@ $(document).ready(function () {
     $('li.group-item').each(function () {
         $(this).on('click', function () {
             index = $(this).index();
-            index = Math.floor(index/2);
             $('.popup').removeClass('active').hide();
             var groupId = ($(this).data('group-id'));
             console.log('groupId: ' + groupId);
             console.log(index);
             $('#group-popup-'+groupId).show().addClass('active');
             $('#group-popup-'+groupId +' input').focus();
-            $('.group-popup .popup-content').scrollTop($('.group-popup .popup-content')[index].scrollHeight);
+            $('#group-popup-' + groupId + ' .popup-content').scrollTop($('#group-popup-' + groupId + ' .popup-content')[0].scrollHeight);
         });
     });
 
@@ -145,6 +144,28 @@ $(document).ready(function () {
         if(!checked) {
             alert("You must choose at least one friend");
             return false;
+        }
+    });
+
+    $('.delete-group').on('click', function () {
+        groupId = $(this).data('group-id');
+        deleteButton = $(this);
+        var url = '/groups/delete/' + groupId;
+        var confirmDelete = confirm('Are you sure?');
+        if (confirmDelete){
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                success: function(response){
+                    deleteButton.remove();
+                    $('#group-item-' + groupId).remove();
+                    // location.reload();
+                },
+                error: function (req, status, err) {
+                    console.log('Something went wrong', status, err);
+                }
+            });
         }
     });
 

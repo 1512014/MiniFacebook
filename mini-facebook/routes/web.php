@@ -42,6 +42,7 @@ Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('
 Route::get('/groups', 'GroupController@getCurrentUserGroups')->middleware('auth');
 Route::get('/groups/{id}/users', 'GroupController@getUsersByGroup')->middleware('auth');
 Route::post('/groups', 'GroupController@addNewGroup')->middleware('auth');
+Route::post('/groups/delete/{id}', 'GroupController@deleteGroup')->middleware('auth')->name('delete-group');
 
 //Auth
 Auth::routes();
