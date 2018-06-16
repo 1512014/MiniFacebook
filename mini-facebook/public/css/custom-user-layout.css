@@ -329,7 +329,7 @@ li.icon a:hover{
     background-color: white;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-
+    z-index: 9999;
 }
 
 .chat-popup .popup-header{
@@ -552,6 +552,7 @@ input:focus:-ms-input-placeholder {
     background-color: white;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    z-index: 9999;
 
 }
 

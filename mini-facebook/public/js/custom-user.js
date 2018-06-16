@@ -107,6 +107,7 @@ $(document).ready(function () {
                 data: formData,
                 success: function(response){
                     data = JSON.parse(response);
+                    $('#post-item-'+postId).find('span.comment-count').html(data.comment_count);
                     console.log(data.comment.id);
                     console.log("success");
                     $('#post-item-' + postId + ' .show-comment-container').prepend(
@@ -121,10 +122,10 @@ $(document).ready(function () {
                         '<div class="col-sm-12">' +
                         '<div class="comment-action">' +
                         ' <div class="btn-group">' +
-                        '<button type="button" class="btn btn-default edit-comment" data-comment-id="'+data.comment.id+'">' +
+                        '<button type="button" class="btn btn-default edit-comment" data-comment-id="'+data.comment.id+'" data-post-id="' + postId + '">' +
                         ' <i class="fas fa-edit"></i>' +
                         '</button>' +
-                        '<button type="button" class="btn btn-default delete-comment" data-comment-id="'+data.comment.id+'">' +
+                        '<button type="button" class="btn btn-default delete-comment" data-comment-id="'+data.comment.id+'" data-post-id="' + postId + '">' +
                         '<i class="fas fa-trash-alt"></i>' +
                         '</button>' +
                         '</div>' +
@@ -142,19 +143,27 @@ $(document).ready(function () {
     });
 
 
-    $('button.delete-comment').on('click', function () {
+    $(document).on('click', '.delete-comment', function () {
         commentId = $(this).data('comment-id');
         url = "/comments/"+commentId;
-
+        var postId = $(this).data('post-id');
+        var formData = JSON.stringify({
+            'post_id': postId
+        });
+        var commentCount = ($('#post-item-'+postId).find('span.comment-count').html());
+        console.log(commentCount);
+        commentCount = commentCount - 1;
+        console.log(commentCount);
         confirmDelete = confirm('Are you sure?');
         if (confirmDelete){
             $.ajax({
                 url: url,
                 type: 'DELETE',
                 contentType: 'application/json',
+                data: formData,
                 success: function(response){
                     data = JSON.parse(response);
-                    console.log("success");
+                    $('#post-item-'+postId).find('span.comment-count').html(commentCount);
                     $('button.delete-comment[data-comment-id='+commentId+']').parents('.comment-item').remove();
                 },
                 error: function (req, status, err) {
@@ -164,7 +173,7 @@ $(document).ready(function () {
         }
     });
 
-    $('button.edit-comment').on('click', function () {
+    $(document).on('click', '.edit-comment', function () {
         $('.comment-item').show();
         commentId = $(this).data('comment-id');
         postId = $(this).data('post-id');
@@ -176,7 +185,8 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function(response){
                 data = JSON.parse(response);
-                $('#post-item-' + postId).find('input.comment').val(data.comment_content).focus();
+                $('#post-item-' + postId).find('input.comment').val(data.comment_content).focus().addClass('edit');
+
             },
             error: function (req, status, err) {
                 console.log('Something went wrong', status, err);

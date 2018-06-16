@@ -109,8 +109,24 @@
             <div class="row react">
                 <div class="col-sm-12">
                 <ul class="react">
-                    <li><a href="#" class="btn btn-default">Like</a> </li>
-                    <li><a href="#" class="btn btn-default">Comment</a> </li>
+                    @if($post->is_liked)
+                    <li>
+                        <a href="#" class="btn btn-default btn-unlike" data-post-id="{{$post->id}}">
+                            <span class="like-status">
+                                Unlike
+                            </span> (<span class="like-count">{{count($post->likes)}}</span>)
+                        </a>
+                    </li>
+                    @else
+                    <li>
+                        <a href="#" class="btn btn-default btn-like" data-post-id="{{$post->id}}">
+                        <span class="like-status">
+                            Like
+                        </span> (<span class="like-count">{{count($post->likes)}}</span>)
+                        </a>
+                    </li>
+                    @endif
+                    <li><a href="#" class="btn btn-default btn-comment" data-post-id="{{$post->id}}">Comment (<span class="comment-count">{{count($post->comments)}}</span>)</a></li>
                 </ul>
                 </div>
             </div>
@@ -151,7 +167,7 @@
                                     <button type="button" class="btn btn-default edit-comment" data-comment-id="{{$comment->id}}" data-post-id="{{$post->id}}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-default delete-comment" data-comment-id="{{$comment->id}}">
+                                    <button type="button" class="btn btn-default delete-comment" data-comment-id="{{$comment->id}}" data-post-id="{{$post->id}}">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>

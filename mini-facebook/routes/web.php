@@ -40,6 +40,10 @@ Route::get('/messages/group', 'MessageController@getNewGroupMessages')->middlewa
 Route::get('/messages', 'MessageController@getNewMessages')->middleware('auth')->name('get-new-message');
 Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
 
+//Like
+Route::post('/likes/create', 'LikeController@addNewLike')->middleware('auth')->name('add-like');
+Route::post('/likes/delete', 'LikeController@deleteLike')->middleware('auth')->name('delete-like');
+
 //Group
 Route::get('/groups', 'GroupController@getCurrentUserGroups')->middleware('auth');
 Route::get('/groups/{id}/users', 'GroupController@getUsersByGroup')->middleware('auth');

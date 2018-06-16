@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $('.comment-container').hide();
+    $('.show-comment-container').hide();
     $('#friend-panel').on('shown.bs.collapse', function () {
         $('.friend-panel-collapse').text('Hide Panel');
     });
@@ -222,7 +224,84 @@ $(document).ready(function () {
         });
     });
 
+    $('.btn-comment').on('click', function () {
+        $('.comment-container').show();
+        $('.show-comment-container').show();
+    });
+
+
+
+    $(document).on('click', '.btn-like', function () {
+        var likeButton = $(this);
+        postId = $(this).data('post-id');
+        var formData = JSON.stringify({
+            'post_id': postId
+        });
+        url= '/likes/create';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: formData,
+            success: function(response){
+                data = JSON.parse(response);
+                console.log(data.like.id);
+                likeButton.remove();
+                $('ul.react').prepend(
+                    '<li>' +
+                    '<a href="#" class="btn btn-default btn-unlike" data-post-id="' + postId + '">' +
+                    '<span class="like-status">' +
+                    'Unlike' +
+                    '</span> (<span class="like-count">' + data.like_count + '</span>)' +
+                    '</a>' +
+                    '</li>'
+                );
+
+                likeButton.find('span.like-status').html('Unlike');
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+        return true;
+    });
+
+    $(document).on('click', '.btn-unlike', function () {
+        var unlikeButton = $(this);
+        postId = $(this).data('post-id');
+        var formData = JSON.stringify({
+            'post_id': postId
+        });
+        url = '/likes/delete';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: formData,
+            success: function(response){
+                data = JSON.parse(response);
+                unlikeButton.remove();
+                $('ul.react').prepend(
+                    '<li>' +
+                    '<a href="#" class="btn btn-default btn-like" data-post-id="' + postId + '">' +
+                    '<span class="like-status">' +
+                    'Like' +
+                    '</span> (<span class="like-count">' + data.like_count + '</span>)' +
+                    '</a>' +
+                    '</li>'
+                );
+
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+    });
     setInterval(getMessages, 1000);
+
+    // setInterval(function () {
+    //     document.location.reload(true);
+    // }, 5000);
 });
 
 function getMessages() {

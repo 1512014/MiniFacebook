@@ -13,17 +13,16 @@ class CommentController extends Controller
     public function addNewComment(Request $request){
         $input = json_decode($request->getContent(), true);
         $comment = Comment::create($input);
+        $comment_count = count(Comment::where('post_id', $input['post_id'])->get());
         $current_user = Auth::user();
-        echo json_encode(['current_user' => $current_user, 'comment'=>$comment]);
+        echo json_encode(['current_user' => $current_user, 'comment'=>$comment, 'comment_count'=>$comment_count]);
         die;
     }
 
     public function deleteComment($id){
         $comment = Comment::findOrFail($id);
-
         $comment->delete();
-
-        echo $id;
+        echo json_encode($id);
         die;
     }
 

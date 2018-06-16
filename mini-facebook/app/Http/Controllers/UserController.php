@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Friend;
+use App\Like;
 use App\Message;
 use App\Post;
 use App\User;
@@ -49,6 +50,8 @@ class UserController extends Controller
         $posts = Post::where('user_id', $user_id)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
+            $post['likes'] = Like::where('post_id', $post->id)->get();
+            $post['is_liked'] = LikeController::isLike($post->id);
             foreach ($post['comments'] as $comment){
                 $comment['comment_author'] = User::where('id', $comment->user_id)->first();
             }

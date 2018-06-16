@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Friend;
+use App\Like;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ class PostController extends Controller
         $posts = Post::whereIn('user_id', $friend_ids)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
+            $post['likes'] = Like::where('post_id', $post->id)->get();
+            $post['is_liked'] = LikeController::isLike($post->id);
             foreach ($post['comments'] as $comment){
                 $comment['comment_author'] = User::where('id', $comment->user_id)->first();
             }
