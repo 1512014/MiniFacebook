@@ -200,4 +200,11 @@ class UserController extends Controller
         die;
     }
 
+    public function updateAbout(Request $request){
+        $input = $request->all();
+        $user = User::where('id', Auth::user()->id);
+        $user->update(['about' => $input['about']]);
+        return redirect()->back();
+    }
+
 }

@@ -6,9 +6,30 @@
 }
 
 .about p {
-    text-align: center;
-    margin: 0;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.edit-about{
+    display: none;
+}
+
+.edit-about form{
     padding: 10px;
+    border: 1px solid #c5c5c5;
+    margin-bottom: 20px;
+}
+
+.edit-about .action-button{
+    text-align: center;
+}
+
+button.edit {
+    float: right;
+    margin: 10px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 950px) {
