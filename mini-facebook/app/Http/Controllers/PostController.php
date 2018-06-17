@@ -70,7 +70,7 @@ class PostController extends Controller
 
             $input['image_path'] = '/img/posts/' .  $filename;
         }
-
+        unset($input['post_id']);
         Post::create($input);
 
         return redirect()->back();
@@ -142,7 +142,7 @@ class PostController extends Controller
         $post->delete();
         $comments->delete();
 
-        return redirect(route('posts.index'));
+        return redirect()->back();
     }
 
     public function getPostById($post_id){

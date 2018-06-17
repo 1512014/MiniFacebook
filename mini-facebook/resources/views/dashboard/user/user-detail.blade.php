@@ -97,7 +97,7 @@
                 </div>
                 @if($post->image_path != null)
                     <div class="row image-container">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" style="text-align: center">
                             <img class="post-image" src="{{$post->image_path}}">
                         </div>
                     </div>

@@ -1,8 +1,14 @@
 <div class="profile-images">
-    <img class="cover" src="{{$user->cover}}">
+    <div class="cover-container">
+        <img class="cover" src="{{$user->cover}}">
+    </div>
     <div class="avatar-container">
         <img class="avatar" src="{{$user->avatar}}">
+        <button type="button" class="btn btn-default change-avatar" data-toggle="modal" data-target="#avatar-modal"><i class="fas fa-camera"></i> </button>
     </div>
+
+    <button type="button" class="btn btn-default change-cover" data-toggle="modal" data-target="#cover-modal"><i class="fas fa-camera"></i> </button>
+
     <ul class="friend-option">
         <li><a href="{{route('user-about', ['id' => $user->id])}}">About</a> </li>
         <li><a href="{{route('user-friend-list', ['id' => $user->id])}}">Friends</a> </li>
@@ -35,5 +41,67 @@
         {{--</button>--}}
     </div>
     @endif
+
+    <div id="avatar-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                {!! Form::open(['method'=>'POST', 'action'=>'UserController@updateAvatar', 'enctype'=>'multipart/form-data']) !!}
+                {{ csrf_field() }}
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Avatar</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group cover-upload">
+                        {!! Form::label('image', 'Upload Image:') !!}
+                        {!! Form::file('image', ['class'=>'form-control', 'onchange' => 'readURL(this);']) !!}
+                        <div class="avatar-cover-container">
+                            <img class="avatar-cover" src="#" alt="Cover"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+
+        </div>
+    </div>
+
+    <div id="cover-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                {!! Form::open(['method'=>'POST', 'action'=>'UserController@updateCover', 'enctype'=>'multipart/form-data']) !!}
+                {{ csrf_field() }}
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Cover</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group cover-upload">
+                        {!! Form::label('image', 'Upload Image:') !!}
+                        {!! Form::file('image', ['class'=>'form-control', 'onchange' => 'readURL(this);']) !!}
+                        <div class="avatar-cover-container">
+                            <img class="avatar-cover" src="#" alt="Cover"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        {!! Form::submit('Update', ['class'=>'btn btn-primary']) !!}
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+
+        </div>
+    </div>
 
 </div>

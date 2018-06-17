@@ -62,11 +62,13 @@
 
 .cover-container{
     text-align: center;
-    height: 400px;
+    max-height: 400px;
 }
 
 .profile-images img.cover{
     height: 400px;
+    width: 700px;
+    object-fit: cover;
     display: inline-block;
 }
 
@@ -112,7 +114,9 @@
 }
 
 .avatar-container img.avatar{
-    width: 100%;
+    width: 148px;
+    height: 148px;
+    object-fit: cover;
 }
 
 ul.friend-option {
@@ -150,6 +154,32 @@ ul.friend-option li:last-child {
 
 .profile-image-buttons button {
     margin-left: 5px!important;
+}
+
+.change-avatar {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid grey;
+}
+
+.change-cover {
+    position: absolute;
+    right: 10px;
+    bottom: 60px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid grey;
+}
+
+.avatar-cover-container{
+    text-align: center;
+    display: none;
+}
+
+.avatar-cover{
+    display: inline-block;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 1050px) {

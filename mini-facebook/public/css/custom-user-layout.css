@@ -122,7 +122,11 @@ i.fa-facebook-square{
 }
 
 img.user-image {
-    height: 24px;
+    height: 26px;
+    width: 26px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #c5c5c5;
     position: relative;
     top: -2px;
 }
@@ -404,11 +408,6 @@ li.icon a:hover{
     padding-left: 10px;
     padding-right: 10px;
     margin-bottom: 5px;
-
-}
-
-.popup-content .other-user img{
-    width: 28px;
 
 }
 

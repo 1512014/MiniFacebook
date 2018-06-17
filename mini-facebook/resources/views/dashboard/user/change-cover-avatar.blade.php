@@ -7,6 +7,7 @@
 @endpush
 @push('scripts')
 <script src="/js/custom-home.js"></script>
+<script src="/js/custom-setting.js"></script>
 @endpush
 
 @section('contacts')

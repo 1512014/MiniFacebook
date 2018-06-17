@@ -24,7 +24,7 @@
                         {{--Loops orther message here--}}
                         <div class="row other-user" data-message-id="{{$message->id}}">
                             <div class="col-sm-2">
-                                <img src="{{$current_user_friend->user_data->avatar}}">
+                                <img class="user-image" src="{{$current_user_friend->user_data->avatar}}">
                             </div>
                             <div class="col-sm-10">
                                 <p class="message">{{$message->message_content}}</p>
@@ -64,7 +64,7 @@
                         {{--Loops orther message here--}}
                         <div class="row other-user" data-message-id="{{$message->id}}">
                             <div class="col-sm-2">
-                                <img src="{{$message->sent_user_data->avatar}}">
+                                <img class="user-image" src="{{$message->sent_user_data->avatar}}">
                             </div>
                             <div class="col-sm-10">
                                 <p class="message">{{$message->message_content}}</p>

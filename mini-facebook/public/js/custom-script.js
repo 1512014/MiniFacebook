@@ -340,7 +340,7 @@ function getMessages() {
                             $('#chat-popup-' + userId + ' .popup-content').append(
                                 '<div class="row other-user"  data-message-id="'+ results[i]['id'] +'">' +
                                 '<div class="col-sm-2">' +
-                                '<img src="' + userAvatar + '">' +
+                                '<img class="user-image" src="' + userAvatar + '">' +
                                 '</div>' +
                                 '<div class="col-sm-10">' +
                                 '<p class="message">' + results[i]['message_content'] + '</p>' +
@@ -391,7 +391,7 @@ function getMessages() {
                             $('#group-popup-' + groupId + ' .popup-content').append(
                                 '<div class="row other-user"  data-message-id="'+ results[i]['id'] +'">' +
                                 '<div class="col-sm-2">' +
-                                '<img src="' + results[i]['sent_user_data']['avatar'] + '">' +
+                                '<img class="user-image" src="' + results[i]['sent_user_data']['avatar'] + '">' +
                                 '</div>' +
                                 '<div class="col-sm-10">' +
                                 '<p class="message">' + results[i]['message_content'] + '</p>' +

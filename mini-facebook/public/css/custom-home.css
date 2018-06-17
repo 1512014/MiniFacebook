@@ -27,6 +27,8 @@ div.post-action {
 
 img.avatar{
     width: 40px;
+    height: 45px;
+    object-fit: cover;
 }
 
 .avatar-container-large{
@@ -34,6 +36,7 @@ img.avatar{
     width: 40px;
     border-radius: 50%;
     float: left;
+    border: 1px solid #c5c5c5;
 }
 
 .avatar-container{
@@ -41,11 +44,15 @@ img.avatar{
     width: 30px;
     border-radius: 50%;
     float: left;
+    border: 1px solid #c5c5c5;
 }
 
 li.contact-item img {
     margin: 0!important;
     height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border: 1px solid #c5c5c5;
 }
 
 .comment-container img.avatar {
@@ -57,8 +64,9 @@ li.contact-item img {
 }
 
 img.post-image {
-    width: 100%;
-    height: auto;
+    display: inline-block;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .post-item {

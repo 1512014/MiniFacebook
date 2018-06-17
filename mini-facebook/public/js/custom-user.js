@@ -113,7 +113,9 @@ $(document).ready(function () {
                     $('#post-item-' + postId + ' .show-comment-container').prepend(
                         '<div class="row comment-item">' +
                         '<div class="col-sm-1">' +
+                        '<div class="avatar-container">' +
                         '<img src="' + data.current_user.avatar + '" class="avatar">' +
+                        '</div>' +
                         '</div>' +
                         '<div class="col-sm-11">' +
                         '<p class="comment-content"> <a href="/users/' + data.current_user.id + '"><span class="comment-owner">' + data.current_user.name + '</span></a>' + commentContent + '</p>' +
@@ -208,4 +210,24 @@ $(document).ready(function () {
         });
     });
 
+    $('.change-avatar').on('click', function () {
+
+    });
+
+
 });
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.avatar-cover')
+                .attr('src', e.target.result)
+                .width('100%');
+            $('.avatar-cover-container').css('display', 'block');
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}

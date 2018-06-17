@@ -207,4 +207,40 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function updateAvatar(Request $request){
+        $current_user = Auth::user();
+        $user = User::where('id', $current_user->id);
+        $input = $request->all();
+        $image = $request->file('image');
+        if($image){
+            $path = public_path(). '/img/avatars/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $input['avatar'] = '/img/avatars/' .  $filename;
+        }
+
+        $user->update(['avatar' => $input['avatar']]);
+
+        return redirect()->back();
+    }
+
+    public function updateCover(Request $request){
+        $current_user = Auth::user();
+        $user = User::where('id', $current_user->id);
+        $input = $request->all();
+        $image = $request->file('image');
+        if($image){
+            $path = public_path(). '/img/covers/';
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move($path, $filename);
+
+            $input['cover'] = '/img/covers/' .  $filename;
+        }
+
+        $user->update(['cover' => $input['cover']]);
+
+        return redirect()->back();
+    }
+
 }

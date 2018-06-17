@@ -26,6 +26,8 @@ Route::get('/user/{id}/requests', 'UserController@getFriendRequests')->middlewar
 Route::get('/user/{id}/about', 'UserController@getAbout')->middleware('auth')->name('user-about');
 Route::post('/user/about', 'UserController@updateAbout')->middleware('auth')->name('update-about');
 Route::get('/user/{id}/avatar-cover', 'UserController@getAvatarAndCover')->middleware('auth')->name('user-avatar-cover');
+Route::post('/user/cover', 'UserController@updateCover')->middleware('auth')->name('update-cover');
+Route::post('/user/avatar', 'UserController@updateAvatar')->middleware('auth')->name('update-avatar');
 Route::post('/friends/delete/{id}', 'UserController@removeFriendById')->middleware('auth')->name('delete-friend');
 Route::post('/friends/accept/{id}', 'UserController@acceptRequest')->middleware('auth')->name('accept-request');
 Route::post('/friends/add/{id}', 'UserController@addFriend')->middleware('auth')->name('add-friend');
