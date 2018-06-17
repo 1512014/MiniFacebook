@@ -232,12 +232,12 @@ $(document).ready(function () {
 
 
     $(document).on('click', '.btn-like', function () {
+        var postId = $(this).data('post-id');
         var likeButton = $(this);
-        postId = $(this).data('post-id');
         var formData = JSON.stringify({
             'post_id': postId
         });
-        url= '/likes/create';
+        var url = '/likes/create';
         $.ajax({
             url: url,
             type: 'POST',
@@ -247,7 +247,7 @@ $(document).ready(function () {
                 data = JSON.parse(response);
                 console.log(data.like.id);
                 likeButton.remove();
-                $('ul.react').prepend(
+                $('#post-item-' + postId + ' ul.react').prepend(
                     '<li>' +
                     '<a href="#" class="btn btn-default btn-unlike" data-post-id="' + postId + '">' +
                     '<span class="like-status">' +
@@ -267,12 +267,12 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.btn-unlike', function () {
+        var postId = $(this).data('post-id');
         var unlikeButton = $(this);
-        postId = $(this).data('post-id');
         var formData = JSON.stringify({
             'post_id': postId
         });
-        url = '/likes/delete';
+        var url = '/likes/delete';
         $.ajax({
             url: url,
             type: 'POST',
@@ -281,7 +281,7 @@ $(document).ready(function () {
             success: function(response){
                 data = JSON.parse(response);
                 unlikeButton.remove();
-                $('ul.react').prepend(
+                $('#post-item-' + postId + ' ul.react').prepend(
                     '<li>' +
                     '<a href="#" class="btn btn-default btn-like" data-post-id="' + postId + '">' +
                     '<span class="like-status">' +
