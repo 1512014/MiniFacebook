@@ -172,7 +172,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.btn-edit-post').on('click', function () {
+    $(document).on('click', '.btn-edit-post' , function () {
         var postId = $(this).data('post-id');
         postSelector = $('#post-item-' + postId);
         var url = '/posts/' + postId;

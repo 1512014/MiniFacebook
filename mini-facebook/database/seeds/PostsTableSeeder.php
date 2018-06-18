@@ -18,37 +18,37 @@ class PostsTableSeeder extends Seeder
             [
                 'id' => 1,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
             [
                 'id' => 2,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
             [
                 'id' => 3,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
             [
                 'id' => 4,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
             [
                 'id' => 5,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
             [
                 'id' => 6,
                 'post_content' => str_random(100),
-                'image_path' => '/img/post1.jpg',
+                'image_path' => '/img/posts/post1.jpg',
                 'user_id' => '1'
             ],
         ];

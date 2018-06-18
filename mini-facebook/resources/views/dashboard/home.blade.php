@@ -54,8 +54,8 @@
     @foreach ($posts as $post)
     <div class="post-item" id="post-item-{{$post->id}}">
         <div class="container-fluid">
-            <div class="row" style="margin-bottom: 20px; height: 40px; line-height: 40px">
-                <div class="col-sm-7">
+            <div class="row" style="height: 40px; line-height: 20px">
+                <div class="col-sm-9">
                     <div class="avatar-container-large">
                         <img src="{{$post->post_author->avatar}}" class="avatar">
                     </div>
@@ -63,9 +63,6 @@
                     <a href="{{route('user-detail', ['id' => $post->post_author->id])}}"><span class="user-name">{{$post->post_author->name}}</span></a>
                 </div>
                 @if($post->user_id === $current_user->id)
-                <div class="col-sm-2">
-                    <span class="posted-time">8 hrs</span>
-                </div>
                 <div class="col-sm-3">
                     <button type="button" class="btn btn-primary btn-edit-post" style="float: left; margin-left: 10px" data-post-id="{{$post->id}}">
                         <i class="fas fa-edit"></i>
@@ -78,14 +75,13 @@
                         </button>
                     </form>
 
-
-
                 </div>
-                @else
-                    <div class="col-sm-5" style="text-align: right">
-                        <span class="posted-time">8 hrs</span>
-                    </div>
                 @endif
+            </div>
+            <div class="row time-dif" style="padding-left: 50px; margin-top: -20px;">
+                <div class="col-sm-12">
+                    <span class="posted-time">{{$post->date}}</span>
+                </div>
             </div>
             <div class="row content-container">
                 <div class="col-sm-12">

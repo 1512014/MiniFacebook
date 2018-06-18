@@ -7,6 +7,7 @@ use App\Friend;
 use App\Like;
 use App\Post;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,10 +27,11 @@ class PostController extends Controller
         foreach ($current_user_friends as $current_user_friend){
             array_push($friend_ids, $current_user_friend->user_data->id);
         }
-//        dd($current_user_friends);
-//        dd($friend_ids);
         $posts = Post::whereIn('user_id', $friend_ids)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
+            $now_date = strtotime(date("Y-m-d H:i:s"));
+            $post_updated = strtotime(date($post->updated_at));
+            $post['date'] = self::humanizeDateDifference($now_date, $post_updated, true);
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
             $post['likes'] = Like::where('post_id', $post->id)->get();
             $post['is_liked'] = LikeController::isLike($post->id);
@@ -162,5 +164,53 @@ class PostController extends Controller
         die;
     }
 
+    public static function humanizeDateDifference($now,$otherDate=null,$offset=null){
+        if($otherDate != null){
+            $offset = $now - $otherDate;
+        }
+        if($offset != null){
+            $deltaS = $offset%60;
+            $offset /= 60;
+            $deltaM = $offset%60;
+            $offset /= 60;
+            $deltaH = $offset%24;
+            $offset /= 24;
+            $deltaD = ($offset > 1)?ceil($offset):$offset;
+        } else{
+            throw new Exception("Must supply otherdate or offset (from now)");
+        }
+        if($deltaD > 1){
+            if($deltaD > 365){
+                $years = ceil($deltaD/365);
+                if($years ==1){
+                    return "last year";
+                } else{
+                    return "<br>$years years ago";
+                }
+            }
+            if($deltaD > 6){
+                return date('d-M',strtotime("$deltaD days ago"));
+            }
+            return "$deltaD days ago";
+        }
+        if($deltaD == 1){
+            return "Yesterday";
+        }
+        if($deltaH == 1){
+            return "last hour";
+        }
+        if($deltaM == 1){
+            return "last minute";
+        }
+        if($deltaH > 0){
+            return $deltaH." hours ago";
+        }
+        if($deltaM > 0){
+            return $deltaM." minutes ago";
+        }
+        else{
+            return "few seconds ago";
+        }
+    }
 
 }

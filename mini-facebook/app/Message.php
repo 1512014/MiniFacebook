@@ -12,6 +12,12 @@ class Message extends Model
     protected $table = "messages";
 
     protected $fillable = [
-        'message_content', 'sent_user', 'received_user', 'group_id', 'is_new'
+        'message_content',
+        'sent_user',
+        'received_user',
+        'group_id',
+        'is_new',
+        'created_at',
+        'updated_at'
     ];
 }

@@ -49,6 +49,9 @@ class UserController extends Controller
         $user['is_request'] = $this->isRequest($current_user->id, $user);
         $posts = Post::where('user_id', $user_id)->orderBy('id','desc')->take(10)->get();
         foreach ($posts as $post){
+            $now_date = strtotime(date("Y-m-d H:i:s"));
+            $post_updated = strtotime(date($post->updated_at));
+            $post['date'] = PostController::humanizeDateDifference($now_date, $post_updated, true);
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
             $post['likes'] = Like::where('post_id', $post->id)->get();
             $post['is_liked'] = LikeController::isLike($post->id);
@@ -222,6 +225,13 @@ class UserController extends Controller
 
         $user->update(['avatar' => $input['avatar']]);
 
+        //Add new post
+        $post_data = [];
+        $post_data['image_path'] = $input['avatar'];
+        $post_data['user_id'] = $current_user->id;
+        $post_data['post_content'] = "I have just update new avatar.";
+        Post::create($post_data);
+
         return redirect()->back();
     }
 
@@ -239,6 +249,13 @@ class UserController extends Controller
         }
 
         $user->update(['cover' => $input['cover']]);
+
+        //Add new post
+        $post_data = [];
+        $post_data['image_path'] = $input['cover'];
+        $post_data['user_id'] = $current_user->id;
+        $post_data['post_content'] = "I have just update new cover photo.";
+        Post::create($post_data);
 
         return redirect()->back();
     }
