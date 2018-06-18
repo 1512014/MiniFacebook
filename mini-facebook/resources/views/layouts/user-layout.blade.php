@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/custom-style.css">
     <link rel="stylesheet" type="text/css" href="/css/custom-user-layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/notification.css">
 
 
     @stack('styles')
@@ -26,6 +27,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/custom-script.js"></script>
     <script src="/js/custom-user.js"></script>
+    <script src="/js/notification.js"></script>
     @stack('scripts')
 
 
@@ -65,6 +67,27 @@
                         <span class="nav-text">Home</span>
                     </a>
                 </li>
+                <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
+                {{--<li class="icon user">--}}
+                    {{--<div class="notification">--}}
+                        {{--<a href="#">--}}
+                            {{--<i class="fas fa-globe"></i>--}}
+                        {{--</a>--}}
+                        {{--<img class src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/bell.svg">--}}
+                        {{--<ul class="notification-menu">--}}
+                            {{--<li>--}}
+                                {{--<img class="avatar" src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/wr2.svg">--}}
+                                {{--<h3>William Roberts II</h3>--}}
+                                {{--<p>Clean as a whistle</p>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<img class="avatar" src="https://s3.amazonaws.com/codecademy-content/projects/2/feedster/fn.svg">--}}
+                                {{--<h3>Faheem Najm</h3>--}}
+                                {{--<p>All I do is win</p>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
                 <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
                 <li class="icon user">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

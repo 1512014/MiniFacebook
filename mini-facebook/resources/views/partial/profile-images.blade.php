@@ -17,7 +17,7 @@
         <li><a href="{{route('user-friend-list', ['id' => $user->id])}}">Friends</a> </li>
         @if($user->id == Auth::user()->id)
             <li><a href="{{route('user-friend-request', ['id' => $user->id])}}">Request</a> </li>
-            <li><a href="{{route('user-avatar-cover', ['id' => $user->id])}}">Avatar & Cover</a> </li>
+{{--            <li><a href="{{route('user-avatar-cover', ['id' => $user->id])}}">Avatar & Cover</a> </li>--}}
         @endif
     </ul>
 
