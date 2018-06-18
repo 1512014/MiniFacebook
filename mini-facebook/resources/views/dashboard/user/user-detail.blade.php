@@ -128,7 +128,7 @@
                 <div class="row comment-container">
                     <div class="col-sm-1">
                         <div class="avatar-container">
-                            <img src="{{$current_user->avatar}}" class="avatar">
+                            <img src="{{$current_user->avatar}}" class="avatar-small">
                         </div>
 
                     </div>

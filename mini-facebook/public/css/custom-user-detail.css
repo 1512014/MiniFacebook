@@ -114,8 +114,14 @@
 }
 
 .avatar-container img.avatar{
-    width: 148px;
-    height: 148px;
+      width: 148px;
+      height: 148px;
+      object-fit: cover;
+  }
+
+.avatar-container img.avatar-small{
+    width: 30px;
+    height: 30px;
     object-fit: cover;
 }
 

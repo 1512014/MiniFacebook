@@ -51,7 +51,7 @@ class UserController extends Controller
         foreach ($posts as $post){
             $now_date = strtotime(date("Y-m-d H:i:s"));
             $post_updated = strtotime(date($post->updated_at));
-            $post['date'] = PostController::humanizeDateDifference($now_date, $post_updated, true);
+            $post['date'] = PostController::humanizeDateDifference($now_date, $post_updated);
             $post['comments'] = Comment::where('post_id', $post->id)->orderBy('id', 'desc')->get();
             $post['likes'] = Like::where('post_id', $post->id)->get();
             $post['is_liked'] = LikeController::isLike($post->id);
@@ -72,7 +72,7 @@ class UserController extends Controller
         $user['is_friend'] = $this->isFriend($current_user->id, $user);
         $user['is_request'] = $this->isRequest($current_user->id, $user);
         $friends = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
-        $current_friends = Friend::where('user1', $current_user->id)->get();
+        $current_friends = Friend::where('user1', $current_user->id)->where('status' , config('dashboard.user.friend-list.status.friend'))->get();
         $friend_ids = [];
         $current_friend_ids = [];
         //get ids

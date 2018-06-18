@@ -4,11 +4,14 @@
     </div>
     <div class="avatar-container">
         <img class="avatar" src="{{$user->avatar}}">
+        @if($user->id == Auth::id())
         <button type="button" class="btn btn-default change-avatar" data-toggle="modal" data-target="#avatar-modal"><i class="fas fa-camera"></i> </button>
+        @endif
     </div>
 
+    @if($user->id == Auth::id())
     <button type="button" class="btn btn-default change-cover" data-toggle="modal" data-target="#cover-modal"><i class="fas fa-camera"></i> </button>
-
+    @endif
     <ul class="friend-option">
         <li><a href="{{route('user-about', ['id' => $user->id])}}">About</a> </li>
         <li><a href="{{route('user-friend-list', ['id' => $user->id])}}">Friends</a> </li>
