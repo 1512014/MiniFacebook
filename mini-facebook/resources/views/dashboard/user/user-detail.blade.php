@@ -147,7 +147,7 @@
                         <div class="row comment-item">
                             <div class="col-sm-1">
                                 <div class="avatar-container">
-                                    <img src="{{$comment->comment_author->avatar}}" class="avatar">
+                                    <img src="{{$comment->comment_author->avatar}}" class="avatar-small">
                                 </div>
                             </div>
                             <div class="col-sm-11">

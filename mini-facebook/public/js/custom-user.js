@@ -114,7 +114,7 @@ $(document).ready(function () {
                         '<div class="row comment-item">' +
                         '<div class="col-sm-1">' +
                         '<div class="avatar-container">' +
-                        '<img src="' + data.current_user.avatar + '" class="avatar">' +
+                        '<img src="' + data.current_user.avatar + '" class="avatar-small">' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-11">' +
