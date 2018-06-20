@@ -1,5 +1,5 @@
 <input type="hidden" id="current_user_id" value="{{Auth::user()->id}}">
-{{--@if(count($current_user_friends)<=0)--}}
+@if(count($current_user_friends) > 0)
     @foreach($current_user_friends as $current_user_friend)
         <div class="popup chat-popup" data-user-id="{{$current_user_friend->user_data->id}}" data-user-avatar="{{$current_user_friend->user_data->avatar}}" id="chat-popup-{{$current_user_friend->user_data->id}}" style="display: none">
             <input type="hidden" id="user_avatar-{{$current_user_friend->user_data->id}}" value="{{$current_user_friend->user_data->avatar}}">
@@ -80,4 +80,4 @@
             </div>
         </div>
     @endforeach
-{{--@endif--}}
+@endif
