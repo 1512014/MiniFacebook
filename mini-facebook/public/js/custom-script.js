@@ -113,6 +113,7 @@ $(document).ready(function () {
     $('.chat-popup input').keypress(function (e) {
         if (e.which == 13) {
             var messageContent = $(this).val();
+            if (!messageContent) return;
             var userId = $(this).data('user-id');
             var url = '/messages/create';
                 $.ajax({
@@ -147,6 +148,7 @@ $(document).ready(function () {
     $('.group-popup input').keypress(function (e) {
         if (e.which == 13) {
             var messageContent = $(this).val();
+            if (!messageContent) return;
             var groupId = $(this).data('group-id');
             var url = '/messages/create';
             $.ajax({
@@ -407,6 +409,7 @@ function getNewMessageNotification() {
             console.log('Something went wrong', status, err);
         }
     });
+    return false;
 }
 
 
