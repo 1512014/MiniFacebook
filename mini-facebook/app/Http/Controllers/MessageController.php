@@ -71,18 +71,34 @@ class MessageController extends Controller
 
     public function countNewContactMessage(Request $request){
         $input = json_decode($request->getContent(), true);
-        $sent_user_id = $request->sent_user_id;
-        $count_contact_message = count(self::getNewMessageFromContact($sent_user_id));
-        echo $count_contact_message;
+        $sent_user_ids = $request->sent_user_ids;
+        $result = [];
+        $result['counts'] = [];
+        $result['sent_user_ids'] = [];
+        foreach ($sent_user_ids as $sent_user_id){
+            $count_contact_message = count(self::getNewMessageFromContact($sent_user_id));
+            array_push($result['sent_user_ids'], $sent_user_id);
+            array_push($result['counts'], $count_contact_message);
+        }
+
+        echo json_encode($result);
         die;
 
     }
 
     public function countNewGroupMessage(Request $request){
         $input = json_decode($request->getContent(), true);
-        $group_id = $request->group_id;
-        $count_group_message = count(self::getNewMessageFromGroup($group_id));
-        echo $count_group_message;
+        $group_ids = $request->group_ids;
+        $result = [];
+        $result['counts'] = [];
+        $result['group_ids'] = [];
+        foreach ($group_ids as $group_id){
+            $count_group_message = count(self::getNewMessageFromGroup($group_id));
+            array_push($result['group_ids'], $group_id);
+            array_push($result['counts'], $count_group_message);
+        }
+
+        echo json_encode($result);
         die;
     }
 

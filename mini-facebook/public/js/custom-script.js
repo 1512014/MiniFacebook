@@ -348,58 +348,70 @@ $(document).ready(function () {
 });
 
 function getNewMessageNotification() {
+    var sentUserIds = [];
+    var groupStartIndex = 0;
     $('.contact-item').each(function () {
+        groupStartIndex++;
         var contact = $(this);
-        var url = '/messages/count/newContactMessages';
         var sendUserId = contact.data('user-id');
-        $.ajax({
-            url: url,
-            contentType: 'application/json',
-            type: 'GET',
-            data: {
-                sent_user_id: sendUserId
-            },
-            success: function(response){
-                result = JSON.parse(response);
-                if (result > 0)
-                {
-                    contact.find('span.message-notification').text(result).show();
-                }
-            },
-            error: function (req, status, err) {
-                console.log('Something went wrong', status, err);
-            }
-        });
+        sentUserIds.push(sendUserId);
     });
 
+    var urlContact = '/messages/count/newContactMessages';
+    $.ajax({
+        url: urlContact,
+        contentType: 'application/json',
+        type: 'GET',
+        data: {
+            sent_user_ids: sentUserIds
+        },
+        success: function(response){
+            result = JSON.parse(response);
+            for (var i = 0; i < result.counts.length; i++){
+                if (result.counts[i] > 0)
+                {
+                    $('#contact-item-' + result.sent_user_ids[i]).find('span.message-notification').text(result.counts[i]).show();
+                }
+            }
+        },
+        error: function (req, status, err) {
+            console.log('Something went wrong', status, err);
+        }
+    });
+
+    var groupIds = [];
     $('.group-item').each(function () {
         var group = $(this);
-        var url = '/messages/count/newGroupMessages';
         var groupId = group.data('group-id');
-        $.ajax({
-            url: url,
-            contentType: 'application/json',
-            type: 'GET',
-            data: {
-                group_id: groupId
-            },
-            success: function(response){
-                result = JSON.parse(response);
-                if (result > 0)
-                {
-                    group.find('span.message-notification').text(result).show();
-                }
-            },
-            error: function (req, status, err) {
-                console.log('Something went wrong', status, err);
-            }
-        });
+        groupIds.push(groupId);
     });
 
+    var urlGroup = '/messages/count/newGroupMessages';
+    $.ajax({
+        url: urlGroup,
+        contentType: 'application/json',
+        type: 'GET',
+        data: {
+            group_ids: groupIds
+        },
+        success: function(response){
+            result = JSON.parse(response);
+            for (var i = 0; i < result.counts.length; i++){
+                if (result.counts[i] > 0)
+                {
+                    $('#group-item-' + result.group_ids[i]).find('span.message-notification').text(result.counts[i]).show();
+                }
+            }
+        },
+        error: function (req, status, err) {
+            console.log('Something went wrong', status, err);
+        }
+    });
 }
 
 
 function getMessages() {
+
     if ($('.chat-popup').is(":visible")){
         userId = $('.chat-popup.active').data('user-id');
         var url = '/messages';
