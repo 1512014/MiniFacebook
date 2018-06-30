@@ -21,6 +21,14 @@ class PostController extends Controller
     public function index()
     {
         //
+        if ($_GET['q']) {
+            $search = $_GET['q'];
+            $current_user = Auth::user();
+            $current_user_friends = UserController::getCurrentUserFriends();
+            $groups = GroupController::getCurrentUserGroups();
+            $users = User::where('name', 'LIKE', '%'.$search.'%')->get();
+            return view('dashboard.search-result', compact('users', 'current_user', 'current_user_friends', 'groups'));
+        }
         $current_user = Auth::user();
         $current_user_friends = UserController::getCurrentUserFriends();
         $friend_ids = [$current_user->id];

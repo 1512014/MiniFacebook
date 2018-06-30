@@ -46,8 +46,8 @@
                     </a></li>
                 <li>
                     <div class="search-container">
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Search" name="search">
+                        <form action="/" method="get">
+                            <input type="text" placeholder="Search" name="q">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>

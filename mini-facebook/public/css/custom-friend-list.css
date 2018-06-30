@@ -36,7 +36,10 @@
 
 
 .friend-list ul.friend-list li img {
-    width: 100%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: inline-block;
 }
 .friend-list ul.friend-list li .user-name{
     text-align: left;
