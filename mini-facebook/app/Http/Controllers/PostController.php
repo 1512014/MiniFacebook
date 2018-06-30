@@ -21,7 +21,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        if ($_GET['q']) {
+        if (isset($_GET['q'])) {
             $search = $_GET['q'];
             $current_user = Auth::user();
             $current_user_friends = UserController::getCurrentUserFriends();
