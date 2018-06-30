@@ -8,6 +8,9 @@
         <button type="button" class="btn btn-default change-avatar" data-toggle="modal" data-target="#avatar-modal"><i class="fas fa-camera"></i> </button>
         @endif
     </div>
+    <div class="username-container">
+        <p>{{$user->name}}</p>
+    </div>
 
     @if($user->id == Auth::id())
     <button type="button" class="btn btn-default change-cover" data-toggle="modal" data-target="#cover-modal"><i class="fas fa-camera"></i> </button>

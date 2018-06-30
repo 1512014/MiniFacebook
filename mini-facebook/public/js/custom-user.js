@@ -85,7 +85,14 @@ $(document).ready(function () {
         });
     });
 
-    $('input.comment').keypress(function (e) {
+    $('textarea.comment').keydown(function (e) {
+        if (e.keyCode === 13 && e.ctrlKey) {
+            //console.log("enterKeyDown+ctrl");
+            $(this).val(function(i,val){
+                return val + "\n";
+            });
+        }
+    }).keypress(function (e) {
         var input = $(this);
         if (e.which == 13) {
             var userId = $(this).data('user-id');
@@ -187,7 +194,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: function(response){
                 data = JSON.parse(response);
-                $('#post-item-' + postId).find('input.comment').val(data.comment_content).focus().addClass('edit');
+                $('#post-item-' + postId).find('textarea.comment').val(data.comment_content).focus().addClass('edit');
 
             },
             error: function (req, status, err) {

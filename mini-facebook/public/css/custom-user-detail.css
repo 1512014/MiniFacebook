@@ -188,6 +188,24 @@ ul.friend-option li:last-child {
     margin-top: 20px;
 }
 
+.username-container {
+    width: 100%;
+    /*position: absolute;*/
+    padding-left: 230px;
+    padding-bottom: 20px;
+    margin-top: -55px;
+}
+
+.username-container p {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 700;
+    -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    color: black;
+}
+
 @media screen and (max-width: 1050px) {
 
     .profile-images {

@@ -135,7 +135,7 @@
 
                 </div>
                 <div class="col-sm-10">
-                    <input type="text" class="comment form-control" placeholder="Leave a comment..." data-post-id="{{$post->id}}" data-user-id="{{$current_user->id}}">
+                    <textarea type="text" class="comment form-control" placeholder="Leave a comment..." data-post-id="{{$post->id}}" data-user-id="{{$current_user->id}}"></textarea>
                 </div>
                 <div class="col-sm-1" style="text-align: center; font-size: 13px; padding: 0">
                     <button type="button" class="upload btn btn-default"><i class="fas fa-camera"></i></button>
