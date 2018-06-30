@@ -375,6 +375,7 @@ function getNewMessageNotification() {
                     $('#contact-item-' + result.sent_user_ids[i]).find('span.message-notification').text(result.counts[i]).show();
                 }
             }
+            return true;
         },
         error: function (req, status, err) {
             console.log('Something went wrong', status, err);
@@ -404,10 +405,12 @@ function getNewMessageNotification() {
                     $('#group-item-' + result.group_ids[i]).find('span.message-notification').text(result.counts[i]).show();
                 }
             }
+            return true;
         },
         error: function (req, status, err) {
             console.log('Something went wrong', status, err);
         }
+
     });
     return false;
 }
