@@ -85,16 +85,9 @@ $(document).ready(function () {
         });
     });
 
-    $('textarea.comment').keydown(function (e) {
-        if (e.keyCode === 13 && e.ctrlKey) {
-            //console.log("enterKeyDown+ctrl");
-            $(this).val(function(i,val){
-                return val + "\n";
-            });
-        }
-    }).keypress(function (e) {
+    $('textarea.comment').keypress(function (e) {
         var input = $(this);
-        if (e.which == 13) {
+        if (e.which === 13 && !e.shiftKey) {
             var userId = $(this).data('user-id');
             var postId = $(this).data('post-id');
             var commentContent = $(this).val();
