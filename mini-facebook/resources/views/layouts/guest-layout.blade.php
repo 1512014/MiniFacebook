@@ -35,7 +35,7 @@
         <!-- Navbar content -->
         <div class="container">
             <div class="logo">
-                <a href="/"><img src="/img/facebook-text-white.png"></a>
+                <a href="/"><span class="mini">mini</span><img src="/img/facebook-text-white.png"></a>
             </div>
 
             <!-- Right Side Of Navbar -->
@@ -55,11 +55,12 @@
         {{--This is the master sidebar.--}}
     @show
 
-    <div class="container" style="padding-top: 1.5em">
+    {{--<div class="container" style="padding-top: 1.5em">--}}
         @yield('content')
-    </div>
+    {{--</div>--}}
 
 
 </div>
+@include('partial.footer')
 </body>
 </html>

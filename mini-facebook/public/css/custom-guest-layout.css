@@ -32,3 +32,16 @@ body{
 .navbar-nav li a:hover{
     color: white!important;
 }
+
+.mini {
+
+    position: relative;
+    color: white;
+    font-size: 30px;
+    top: 13px;
+    left: 20px;
+}
+
+.logo a:hover{
+    text-decoration: none;
+}

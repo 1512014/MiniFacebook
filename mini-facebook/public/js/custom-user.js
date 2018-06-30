@@ -136,6 +136,7 @@ $(document).ready(function () {
                         '</div>'
 
                     );
+                    $('textarea.comment').val('');
                 },
                 error: function (req, status, err) {
                     console.log('Something went wrong', status, err);
