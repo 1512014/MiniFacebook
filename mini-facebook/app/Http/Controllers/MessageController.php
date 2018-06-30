@@ -51,4 +51,51 @@ class MessageController extends Controller
         }
         return $messages;
     }
+
+    static public function getNewMessageFromContact ($sent_user_id){
+        $current_user = Auth::user();
+        $messages = Message::where('sent_user', $sent_user_id)
+            ->where('is_new', 1)
+            ->where('received_user', $current_user->id)
+            ->get();
+        return $messages;
+    }
+    static public function getNewMessageFromGroup ($group_id){
+        $current_user = Auth::user();
+        $messages = Message::where('group_id', $group_id)
+            ->where('is_new', 1)
+            ->where('sent_user', '!=', $current_user->id)
+            ->get();
+        return $messages;
+    }
+
+    public function countNewContactMessage(Request $request){
+        $input = json_decode($request->getContent(), true);
+        $sent_user_id = $request->sent_user_id;
+        $count_contact_message = count(self::getNewMessageFromContact($sent_user_id));
+        echo $count_contact_message;
+        die;
+
+    }
+
+    public function countNewGroupMessage(Request $request){
+        $input = json_decode($request->getContent(), true);
+        $group_id = $request->group_id;
+        $count_group_message = count(self::getNewMessageFromGroup($group_id));
+        echo $count_group_message;
+        die;
+    }
+
+    static public function seenMessages (Request $request){
+//        $input = json_decode($request->getContent(), true);
+        $message_ids = $request->message_ids;
+        foreach ($message_ids as $message_id) {
+            $message = Message::where('id', $message_id);
+            $query = ['is_new' => 0];
+            $message->update($query);
+        }
+        echo json_encode($message_ids);
+        die;
+
+    }
 }

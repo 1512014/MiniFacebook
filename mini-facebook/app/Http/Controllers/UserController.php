@@ -23,6 +23,10 @@ class UserController extends Controller
                     ->whereIn('received_user', [$current_user->id, $friend->user2])
                     ->orderBy('id', 'asc')
                     ->get();
+            $friend['new_message_count'] = count(MessageController::getNewMessageFromContact($friend->user2));
+            if($friend['new_message_count'] > 0){
+                $friend['has_new_message'] = true;
+            }
         }
         return $friends;
     }

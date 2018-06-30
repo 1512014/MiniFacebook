@@ -42,6 +42,9 @@ Route::delete('/comments/{id}', 'CommentController@deleteComment')->middleware('
 Route::get('/messages/group', 'MessageController@getNewGroupMessages')->middleware('auth')->name('get-new-group-message');
 Route::get('/messages', 'MessageController@getNewMessages')->middleware('auth')->name('get-new-message');
 Route::post('/messages/create', 'MessageController@addNewMessage')->middleware('auth')->name('add-message');
+Route::post('/messages/seen', 'MessageController@seenMessages')->middleware('auth')->name('seen-message');
+Route::get('/messages/count/newGroupMessages', 'MessageController@countNewGroupMessage')->middleware('auth')->name('count-group-message');
+Route::get('/messages/count/newContactMessages', 'MessageController@countNewContactMessage')->middleware('auth')->name('count-contact-message');
 
 //Like
 Route::post('/likes/create', 'LikeController@addNewLike')->middleware('auth')->name('add-like');

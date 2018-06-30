@@ -45,13 +45,33 @@ $(document).ready(function () {
     $('li.contact-item').each(function () {
         $(this).on('click', function () {
             index = $(this).index();
-            console.log(index);
             $('.popup').removeClass('active').hide();
             var userId = ($(this).data('user-id'));
             $('#chat-popup-' + userId).show().addClass('active');
             $('#chat-popup-' + userId + ' input').focus();
             $('.popup-content').scrollTop($('.popup-content')[index].scrollHeight);
-            // showPopup('#chat-popup-' + userId);
+
+            var messageIds = [];
+            var contact = $(this);
+            $('#chat-popup-' + userId).find('.other-user').each(function () {
+                messageIds.push($(this).data('message-id'));
+            });
+            var url = '/messages/seen';
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                type: 'POST',
+                data: JSON.stringify({
+                    message_ids: messageIds
+                }),
+                success: function(response){
+                    result = JSON.parse(response);
+                    contact.find('span.message-notification').hide();
+                },
+                error: function (req, status, err) {
+                    console.log('Something went wrong', status, err);
+                }
+            });
         });
     });
 
@@ -65,6 +85,28 @@ $(document).ready(function () {
             $('#group-popup-'+groupId).show().addClass('active');
             $('#group-popup-'+groupId +' input').focus();
             $('#group-popup-' + groupId + ' .popup-content').scrollTop($('#group-popup-' + groupId + ' .popup-content')[0].scrollHeight);
+
+            var messageIds = [];
+            var group = $(this);
+            $('#group-popup-' + groupId).find('.other-user').each(function () {
+                messageIds.push($(this).data('message-id'));
+            });
+            var url = '/messages/seen';
+            $.ajax({
+                url: url,
+                contentType: 'application/json',
+                type: 'POST',
+                data: JSON.stringify({
+                    message_ids: messageIds
+                }),
+                success: function(response){
+                    result = JSON.parse(response);
+                    group.find('span.message-notification').hide();
+                },
+                error: function (req, status, err) {
+                    console.log('Something went wrong', status, err);
+                }
+            });
         });
     });
 
@@ -298,11 +340,64 @@ $(document).ready(function () {
         });
     });
     setInterval(getMessages, 1000);
+    setInterval(getNewMessageNotification, 2000);
 
     // setInterval(function () {
     //     document.location.reload(true);
     // }, 5000);
 });
+
+function getNewMessageNotification() {
+    $('.contact-item').each(function () {
+        var contact = $(this);
+        var url = '/messages/count/newContactMessages';
+        var sendUserId = contact.data('user-id');
+        $.ajax({
+            url: url,
+            contentType: 'application/json',
+            type: 'GET',
+            data: {
+                sent_user_id: sendUserId
+            },
+            success: function(response){
+                result = JSON.parse(response);
+                if (result > 0)
+                {
+                    contact.find('span.message-notification').text(result).show();
+                }
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+    });
+
+    $('.group-item').each(function () {
+        var group = $(this);
+        var url = '/messages/count/newGroupMessages';
+        var groupId = group.data('group-id');
+        $.ajax({
+            url: url,
+            contentType: 'application/json',
+            type: 'GET',
+            data: {
+                group_id: groupId
+            },
+            success: function(response){
+                result = JSON.parse(response);
+                if (result > 0)
+                {
+                    group.find('span.message-notification').text(result).show();
+                }
+            },
+            error: function (req, status, err) {
+                console.log('Something went wrong', status, err);
+            }
+        });
+    });
+
+}
+
 
 function getMessages() {
     if ($('.chat-popup').is(":visible")){

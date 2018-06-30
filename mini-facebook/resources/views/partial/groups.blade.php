@@ -7,7 +7,10 @@
             <img src="{{$group->group_avatar}}">
         </div>
 
-        <span class="name">{{(strlen($group->name) > 15)? substr($group->name, 0, 15) . '...' : $group->name}}</span>
+        <span class="name">{{(strlen($group->name) > 12)? substr($group->name, 0, 12) . '...' : $group->name}}</span>
+        @if($group->has_new_message)
+            <span class="message-notification">{{$group->new_message_count}}</span>
+        @endif
     </li>
 
 @endforeach

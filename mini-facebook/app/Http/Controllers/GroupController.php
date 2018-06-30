@@ -21,6 +21,10 @@ class GroupController extends Controller
                 if ($current_user->id == $user_id){
                     $group['users'] = self::getUsersByGroup($group->id);
                     $group['messages'] = MessageController::getGroupMessages($group->id);
+                    $group['new_message_count'] = count(MessageController::getNewMessageFromGroup($group->id));
+                    if($group['new_message_count'] > 0){
+                        $group['has_new_message'] = true;
+                    }
 
                     array_push($results, $group);
                 }
