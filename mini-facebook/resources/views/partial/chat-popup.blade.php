@@ -36,7 +36,7 @@
             </div>
             <div class="popup-input">
                 <input type="text" name="message_content" class="form-control message_content" data-user-id="{{$current_user_friend->user_data->id}}" placeholder="Type a message...">
-                <button type="button" class="btn btn-default add-photo-message"><i class="fas fa-camera"></i></button>
+                {{--<button type="button" class="btn btn-default add-photo-message"><i class="fas fa-camera"></i></button>--}}
             </div>
         </div>
     @endforeach
@@ -76,7 +76,7 @@
             </div>
             <div class="popup-input">
                 <input type="text" name="message_content" class="form-control message_content" data-group-id="{{$group->id}}" placeholder="Type a message...">
-                <button type="button" class="btn btn-default add-photo-message"><i class="fas fa-camera"></i></button>
+                {{--<button type="button" class="btn btn-default add-photo-message"><i class="fas fa-camera"></i></button>--}}
             </div>
         </div>
     @endforeach

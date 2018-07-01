@@ -88,7 +88,7 @@
                         {{--</ul>--}}
                     {{--</div>--}}
                 {{--</li>--}}
-                <li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>
+                {{--<li class="horizontal-hr" style="margin-left: 10px;margin-right: 10px;"></li>--}}
                 <li class="icon user">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i style="line-height: 26px;" class="fas fa-sign-out-alt"></i>
