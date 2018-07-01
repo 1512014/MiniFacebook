@@ -35,7 +35,7 @@ class PostController extends Controller
         foreach ($current_user_friends as $current_user_friend){
             array_push($friend_ids, $current_user_friend->user_data->id);
         }
-        $posts = Post::whereIn('user_id', $friend_ids)->orderBy('id','desc')->take(10)->get();
+        $posts = Post::whereIn('user_id', $friend_ids)->orderBy('id','desc')->get();
         foreach ($posts as $post){
             $now_date = strtotime(date("Y-m-d H:i:s"));
             $post_updated = strtotime(date($post->updated_at));
