@@ -61,10 +61,16 @@ li.contact-item img {
 
 .comment-container img.avatar {
     width: 30px;
+    height: 30px;
+    display: inline-block;
+    object-fit: cover;
 }
 
 .comment-item img.avatar{
     width: 30px;
+    height: 30px;
+    display: inline-block;
+    object-fit: cover;
 }
 
 img.post-image {

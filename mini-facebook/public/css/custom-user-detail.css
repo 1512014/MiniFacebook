@@ -114,14 +114,16 @@
 }
 
 .avatar-container img.avatar{
-      width: 148px;
-      height: 148px;
-      object-fit: cover;
+    width: 148px;
+    height: 148px;
+    display: inline-block;
+    object-fit: cover;
 }
 
 .avatar-container img.avatar-small{
     width: 30px;
     height: 30px;
+    display: inline-block;
     object-fit: cover;
 }
 

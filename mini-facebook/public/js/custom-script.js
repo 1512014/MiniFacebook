@@ -344,9 +344,6 @@ $(document).ready(function () {
     setInterval(getMessages, 1000);
     setInterval(getNewMessageNotification, 1500);
 
-    // setInterval(function () {
-    //     document.location.reload(true);
-    // }, 5000);
 });
 
 function getNewMessageNotification() {
