@@ -67,7 +67,8 @@ class UserController extends Controller
         }
         $current_user_friends = self::getCurrentUserFriends();
         $groups = GroupController::getCurrentUserGroups();
-        return view('dashboard.user.user-detail', compact('posts', 'current_user', 'user', 'current_user_friends', 'groups'));
+        $requests = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.pending'))->get();
+        return view('dashboard.user.user-detail', compact('posts', 'current_user', 'user', 'current_user_friends', 'groups', 'requests'));
     }
 
     public function getFriendList($user_id){
@@ -102,7 +103,8 @@ class UserController extends Controller
         }
         $current_user_friends = self::getCurrentUserFriends();
         $groups = GroupController::getCurrentUserGroups();
-        return view('dashboard.user.friend-list', compact('user', 'friends', 'current_user', 'current_user_friends', 'groups'));
+        $requests = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.pending'))->get();
+        return view('dashboard.user.friend-list', compact('user', 'friends', 'current_user', 'current_user_friends', 'groups', 'requests'));
     }
 
     public function getFriendRequests($user_id){
@@ -134,7 +136,8 @@ class UserController extends Controller
         }
         $current_user_friends = self::getCurrentUserFriends();
         $groups = GroupController::getCurrentUserGroups();
-        return view('dashboard.user.about', compact('user', 'friends', 'current_user_friends', 'current_user', 'groups'));
+        $requests = Friend::where('user1', $user->id)->where('status' , config('dashboard.user.friend-list.status.pending'))->get();
+        return view('dashboard.user.about', compact('user', 'friends', 'current_user_friends', 'current_user', 'groups', 'requests'));
     }
 
     public function getAvatarAndCover($user_id){
